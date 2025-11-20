@@ -278,20 +278,36 @@
             position: relative;
             flex-direction: column;
         }
+        .color-picker-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007bff, #00a8ff);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 168, 255, 0.3);
+        }
+        .color-picker-btn:hover {
+            border-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 168, 255, 0.5);
+            transform: scale(1.05);
+        }
         .color-picker-dropdown {
             position: relative;
             top: 0;
             left: 0;
             transform: none;
-            background: rgba(26, 26, 26, 0.95);
-            border: 1px solid rgba(0, 168, 255, 0.3);
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 8px;
+            background: rgba(0, 100, 200, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 168, 255, 0.5);
+            border-radius: 15px;
+            padding: 16px;
+            margin-top: 12px;
             display: none;
             z-index: 1000;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             min-width: auto;
             width: 100%;
             align-items: center;
@@ -299,16 +315,39 @@
         .color-picker-dropdown.show {
             display: flex;
         }
+        .dropdown-header {
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .default-color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 168, 255, 0.3);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .default-color-box:hover {
+            border-color: #ffffff;
+            box-shadow: 0 6px 16px rgba(0, 168, 255, 0.5);
+            transform: scale(1.05);
+        }
         .dropdown-content {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
             width: 100%;
         }
         .color-preset {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.5);
             cursor: pointer;
@@ -316,12 +355,12 @@
         }
         .color-preset:hover {
             border-color: #ffffff;
-            transform: scale(1.1);
-            box-shadow: 0 0 8px rgba(0, 168, 255, 0.5);
+            transform: scale(1.15);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
         }
         .color-custom-input {
-            width: 32px;
-            height: 32px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.5);
             cursor: pointer;
@@ -337,7 +376,7 @@
         .color-custom-input:hover {
             border-color: #ffffff;
             transform: scale(1.1);
-            box-shadow: 0 0 8px rgba(0, 168, 255, 0.5);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
         }
         .color-custom-input::-webkit-color-swatch-wrapper {
             padding: 0;
@@ -577,13 +616,15 @@
             .interactive-wrapper { padding: 15px; gap: 20px; }
             .controls-panel { flex: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
             .control-group { margin-bottom: 10px; }
-            .control-group input[type="color"] { width: 40px; height: 40px; }
             .control-group label { font-size: 0.9rem; margin-bottom: 8px; }
-            .color-picker-wrapper { gap: 6px; }
-            .color-picker-dropdown { padding: 10px; }
-            .dropdown-content { gap: 6px; }
-            .color-preset { width: 30px; height: 30px; }
-            .color-picker-dropdown button { padding: 6px 12px; font-size: 0.75rem; }
+            .color-picker-wrapper { gap: 10px; }
+            .color-picker-btn { width: 45px; height: 45px; }
+            .color-picker-dropdown { padding: 12px; gap: 10px; }
+            .default-color-box { width: 50px; height: 50px; }
+            .dropdown-header { font-size: 0.8rem; }
+            .dropdown-content { gap: 8px; }
+            .color-preset { width: 32px; height: 32px; }
+            .color-custom-input { width: 40px; height: 40px; }
             .partners-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .footer-col { padding: 15px 0; }
@@ -601,11 +642,14 @@
             .bubble { min-width: 80px; padding: 8px 10px; font-size: 0.65rem; }
             #three-container { height: 300px; }
             .controls-panel { padding: 12px; gap: 12px; }
-            .control-group input[type="color"] { width: 38px; height: 38px; }
-            .color-picker-dropdown { padding: 8px; }
-            .dropdown-content { gap: 5px; }
+            .control-group label { font-size: 0.85rem; }
+            .color-picker-btn { width: 40px; height: 40px; }
+            .color-picker-dropdown { padding: 10px; gap: 8px; }
+            .default-color-box { width: 45px; height: 45px; }
+            .dropdown-header { font-size: 0.75rem; }
+            .dropdown-content { gap: 6px; }
             .color-preset { width: 28px; height: 28px; }
-            .color-picker-dropdown button { padding: 6px 10px; font-size: 0.7rem; }
+            .color-custom-input { width: 35px; height: 35px; }
             h2 { font-size: 1.3rem; }
             .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
             .gallery-item img { height: 150px; }
@@ -685,16 +729,23 @@
                         <div class="control-group">
                             <label>Cor Toolfins</label>
                             <div class="color-picker-wrapper">
-                                <input type="color" id="bodyColorPicker" value="#007bff" class="color-input">
+                                <button id="bodyColorPickerBtn" class="color-picker-btn" title="Clique para personalizar cores"></button>
                                 <div class="color-picker-dropdown" id="bodyColorDropdown">
+                                    <div class="dropdown-header">Cor Padrão</div>
+                                    <div class="default-color-box" style="background: #007bff;"></div>
+                                    
+                                    <div class="dropdown-header" style="margin-top: 12px;">Personalizadas</div>
                                     <div class="dropdown-content">
-                                        <div class="color-preset" style="background: #007bff;" title="Azul Padrão" data-color="#007bff"></div>
                                         <div class="color-preset" style="background: #ff0000;" title="Vermelho" data-color="#ff0000"></div>
                                         <div class="color-preset" style="background: #00ff00;" title="Verde" data-color="#00ff00"></div>
                                         <div class="color-preset" style="background: #ffff00;" title="Amarelo" data-color="#ffff00"></div>
                                         <div class="color-preset" style="background: #ff00ff;" title="Magenta" data-color="#ff00ff"></div>
-                                        <input type="color" id="bodyColorCustom" class="color-custom-input" title="Cor personalizada">
+                                        <div class="color-preset" style="background: #00ccff;" title="Ciano" data-color="#00ccff"></div>
+                                        <div class="color-preset" style="background: #ff6600;" title="Laranja" data-color="#ff6600"></div>
                                     </div>
+                                    
+                                    <div class="dropdown-header" style="margin-top: 12px;">Cor Customizada</div>
+                                    <input type="color" id="bodyColorCustom" class="color-custom-input" value="#007bff" title="Escolha uma cor">
                                 </div>
                             </div>
                         </div>
@@ -702,16 +753,23 @@
                         <div class="control-group">
                             <label>Cor Capinha</label>
                             <div class="color-picker-wrapper">
-                                <input type="color" id="capColorPicker" value="#007bff" class="color-input">
+                                <button id="capColorPickerBtn" class="color-picker-btn" title="Clique para personalizar cores"></button>
                                 <div class="color-picker-dropdown" id="capColorDropdown">
+                                    <div class="dropdown-header">Cor Padrão</div>
+                                    <div class="default-color-box" style="background: #007bff;"></div>
+                                    
+                                    <div class="dropdown-header" style="margin-top: 12px;">Personalizadas</div>
                                     <div class="dropdown-content">
-                                        <div class="color-preset" style="background: #007bff;" title="Azul Padrão" data-color="#007bff"></div>
                                         <div class="color-preset" style="background: #ff0000;" title="Vermelho" data-color="#ff0000"></div>
                                         <div class="color-preset" style="background: #00ff00;" title="Verde" data-color="#00ff00"></div>
                                         <div class="color-preset" style="background: #ffff00;" title="Amarelo" data-color="#ffff00"></div>
                                         <div class="color-preset" style="background: #ff00ff;" title="Magenta" data-color="#ff00ff"></div>
-                                        <input type="color" id="capColorCustom" class="color-custom-input" title="Cor personalizada">
+                                        <div class="color-preset" style="background: #00ccff;" title="Ciano" data-color="#00ccff"></div>
+                                        <div class="color-preset" style="background: #ff6600;" title="Laranja" data-color="#ff6600"></div>
                                     </div>
+                                    
+                                    <div class="dropdown-header" style="margin-top: 12px;">Cor Customizada</div>
+                                    <input type="color" id="capColorCustom" class="color-custom-input" value="#007bff" title="Escolha uma cor">
                                 </div>
                             </div>
                         </div>
@@ -988,19 +1046,23 @@
         // Mostrar/esconder dropdown do color picker
         const bodyColorDropdown = document.getElementById('bodyColorDropdown');
         const capColorDropdown = document.getElementById('capColorDropdown');
-        const bodyColorPicker = document.getElementById('bodyColorPicker');
-        const capColorPickerInput = document.getElementById('capColorPicker');
+        const bodyColorPickerBtn = document.getElementById('bodyColorPickerBtn');
+        const capColorPickerBtn = document.getElementById('capColorPickerBtn');
 
-        // Abrir/fechar dropdowns
-        if (bodyColorPicker && bodyColorDropdown) {
-            bodyColorPicker.addEventListener('click', () => {
+        // Armazenar cores atuais
+        let bodyCurrentColor = '#007bff';
+        let capCurrentColor = '#007bff';
+
+        // Abrir/fechar dropdowns com botões
+        if (bodyColorPickerBtn && bodyColorDropdown) {
+            bodyColorPickerBtn.addEventListener('click', () => {
                 bodyColorDropdown.classList.toggle('show');
                 capColorDropdown.classList.remove('show');
             });
         }
 
-        if (capColorPickerInput && capColorDropdown) {
-            capColorPickerInput.addEventListener('click', () => {
+        if (capColorPickerBtn && capColorDropdown) {
+            capColorPickerBtn.addEventListener('click', () => {
                 capColorDropdown.classList.toggle('show');
                 bodyColorDropdown.classList.remove('show');
             });
@@ -1014,6 +1076,27 @@
             }
         });
 
+        // Lidar com cliques na cor padrão
+        const defaultColorBoxes = document.querySelectorAll('.default-color-box');
+        defaultColorBoxes.forEach(box => {
+            box.addEventListener('click', (e) => {
+                const dropdown = e.target.closest('.color-picker-dropdown');
+                const defaultColor = '#007bff';
+                
+                if (dropdown.id === 'bodyColorDropdown') {
+                    bodyCurrentColor = defaultColor;
+                    bodyColorPickerBtn.style.background = `linear-gradient(135deg, ${defaultColor}, ${defaultColor})`;
+                    applyBodyColor(defaultColor);
+                    bodyColorDropdown.classList.remove('show');
+                } else if (dropdown.id === 'capColorDropdown') {
+                    capCurrentColor = defaultColor;
+                    capColorPickerBtn.style.background = `linear-gradient(135deg, ${defaultColor}, ${defaultColor})`;
+                    applyCapColor(defaultColor);
+                    capColorDropdown.classList.remove('show');
+                }
+            });
+        });
+
         // Lidar com cliques nos presets de cor
         const colorPresets = document.querySelectorAll('.color-preset');
         colorPresets.forEach(preset => {
@@ -1022,12 +1105,14 @@
                 const dropdown = e.target.closest('.color-picker-dropdown');
                 
                 if (dropdown.id === 'bodyColorDropdown') {
-                    bodyColorPicker.value = color;
-                    bodyColorPicker.dispatchEvent(new Event('input', { bubbles: true }));
+                    bodyCurrentColor = color;
+                    bodyColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+                    applyBodyColor(color);
                     bodyColorDropdown.classList.remove('show');
                 } else if (dropdown.id === 'capColorDropdown') {
-                    capColorPickerInput.value = color;
-                    capColorPickerInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    capCurrentColor = color;
+                    capColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+                    applyCapColor(color);
                     capColorDropdown.classList.remove('show');
                 }
             });
@@ -1038,8 +1123,9 @@
         if (bodyColorCustom) {
             bodyColorCustom.addEventListener('input', (e) => {
                 const color = e.target.value;
-                bodyColorPicker.value = color;
-                bodyColorPicker.dispatchEvent(new Event('input', { bubbles: true }));
+                bodyCurrentColor = color;
+                bodyColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+                applyBodyColor(color);
                 bodyColorDropdown.classList.remove('show');
             });
         }
@@ -1048,56 +1134,49 @@
         if (capColorCustom) {
             capColorCustom.addEventListener('input', (e) => {
                 const color = e.target.value;
-                capColorPickerInput.value = color;
-                capColorPickerInput.dispatchEvent(new Event('input', { bubbles: true }));
+                capCurrentColor = color;
+                capColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+                applyCapColor(color);
                 capColorDropdown.classList.remove('show');
             });
         }
 
-        // Color picker do corpo (se existir)
-        const bodyColorPickerInput = document.getElementById('bodyColorPicker');
-        if (bodyColorPicker) {
-            bodyColorPicker.addEventListener('input', (e) => {
-                if (!toolfinsModel) return;
-                const hexColor = parseInt(e.target.value.slice(1), 16);
-                toolfinsModel.traverse((child) => {
-                    if (child.isMesh && child.name === 'ToolFins_corpo') {
-                        // Limpar texturas e mapas
-                        child.material.map = null;
-                        child.material.roughnessMap = null;
-                        child.material.metalnessMap = null;
-                        // Setar cor base
-                        child.material.color.setHex(hexColor);
-                        // Remover emissive para não estourar cores
-                        child.material.emissive.setHex(0x000000);
-                        child.material.emissiveIntensity = 0;
-                        child.material.needsUpdate = true;
-                    }
-                });
+        // Funções para aplicar cores
+        function applyBodyColor(hexColor) {
+            if (!toolfinsModel) return;
+            const numColor = parseInt(hexColor.slice(1), 16);
+            toolfinsModel.traverse((child) => {
+                if (child.isMesh && child.name === 'ToolFins_corpo') {
+                    child.material.map = null;
+                    child.material.roughnessMap = null;
+                    child.material.metalnessMap = null;
+                    child.material.color.setHex(numColor);
+                    child.material.metalness = 0.1;
+                    child.material.roughness = 0.4;
+                    child.material.emissive.setHex(0x000000);
+                }
             });
         }
 
-        // Color picker da capinha
-        if (capColorPickerInput) {
-            capColorPickerInput.addEventListener('input', (e) => {
-                if (!toolfinsModel) return;
-                const hexColor = parseInt(e.target.value.slice(1), 16);
-                toolfinsModel.traverse((child) => {
-                    if (child.isMesh && child.name === 'AbrirChavinha001') {
-                        // Limpar texturas e mapas
-                        child.material.map = null;
-                        child.material.roughnessMap = null;
-                        child.material.metalnessMap = null;
-                        // Setar cor base
-                        child.material.color.setHex(hexColor);
-                        // Remover emissive para não estourar cores
-                        child.material.emissive.setHex(0x000000);
-                        child.material.emissiveIntensity = 0;
-                        child.material.needsUpdate = true;
-                    }
-                });
+        function applyCapColor(hexColor) {
+            if (!toolfinsModel) return;
+            const numColor = parseInt(hexColor.slice(1), 16);
+            toolfinsModel.traverse((child) => {
+                if (child.isMesh && child.name === 'AbrirChavinha001') {
+                    child.material.map = null;
+                    child.material.roughnessMap = null;
+                    child.material.metalnessMap = null;
+                    child.material.color.setHex(numColor);
+                    child.material.metalness = 0.1;
+                    child.material.roughness = 0.4;
+                    child.material.emissive.setHex(0x000000);
+                }
             });
         }
+
+        // Color picker do corpo - REMOVIDO (usando funções acima agora)
+
+        // Color picker do corpo (se existir)
 
         // Botão de toggle da chavinha (se existir)
         const toggleFinKey = document.getElementById('toggleFinKey');
