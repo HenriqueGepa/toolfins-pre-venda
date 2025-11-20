@@ -704,6 +704,13 @@
                         child.material.roughness = 0.3;
                         child.material.needsUpdate = true;
                     }
+                    // Colorir ToolFins_3d_test_2 também com cinza metálico
+                    if (child.isMesh && child.name === 'ToolFins_3d_test_2') {
+                        child.material.color.setHex(0xcccccc); // Cinza claro
+                        child.material.metalness = 0.7;
+                        child.material.roughness = 0.3;
+                        child.material.needsUpdate = true;
+                    }
                 });
 
                 // Configura animações
