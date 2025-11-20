@@ -678,9 +678,9 @@
             controls.enableDamping = true;
 
             // 6. Carregar Modelo
-            // IMPORTANTE: O caminho deve ser assets/models/toolfins.glb
+            // Carregando do arquivo na raiz do projeto
             const loader = new THREE.GLTFLoader();
-            loader.load('assets/models/toolfins.glb', function (gltf) {
+            loader.load('toolfins.glb', function (gltf) {
                 toolfinsModel = gltf.scene;
                 scene.add(toolfinsModel);
 
