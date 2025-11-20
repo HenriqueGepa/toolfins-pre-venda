@@ -271,7 +271,7 @@
         /* 3. GALERIA */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
         .gallery-item { overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
@@ -282,6 +282,10 @@
             transition: transform 0.4s;
         }
         .gallery-item img:hover { transform: scale(1.05); }
+        .gallery-item video {
+            width: 100%;
+            background: #000;
+        }
 
         /* 4. LISTA DE INTERESSE */
         .interest-section {
@@ -513,9 +517,41 @@
                 <h2>Na Prática</h2>
                 <span class="subtitle">Veja suas funções</span>
                 <div class="gallery-grid">
-                    <div class="gallery-item"><img src="assets/images/foto1.jpg" alt="Uso na praia"></div>
-                    <div class="gallery-item"><img src="assets/images/foto2.jpg" alt="Detalhe produto"></div>
-                    <div class="gallery-item"><img src="assets/images/foto3.jpg" alt="Surfista"></div>
+                    <div class="gallery-item">
+                        <video width="100%" height="300" controls style="border-radius: 10px;">
+                            <source src="" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #e0e0e0; font-weight: 500;">Raspador de Parafina</p>
+                    </div>
+                    <div class="gallery-item">
+                        <video width="100%" height="300" controls style="border-radius: 10px;">
+                            <source src="" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #e0e0e0; font-weight: 500;">Pente de Parafina</p>
+                    </div>
+                    <div class="gallery-item">
+                        <video width="100%" height="300" controls style="border-radius: 10px;">
+                            <source src="" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #e0e0e0; font-weight: 500;">Sacador de Quilha</p>
+                    </div>
+                    <div class="gallery-item">
+                        <video width="100%" height="300" controls style="border-radius: 10px;">
+                            <source src="" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #e0e0e0; font-weight: 500;">Colocador de Quilha</p>
+                    </div>
+                    <div class="gallery-item">
+                        <video width="100%" height="300" controls style="border-radius: 10px;">
+                            <source src="" type="video/mp4">
+                            Seu navegador não suporta vídeos.
+                        </video>
+                        <p style="text-align: center; margin-top: 10px; color: #e0e0e0; font-weight: 500;">Chave de Quilha</p>
+                    </div>
                 </div>
             </div>
         </section>
