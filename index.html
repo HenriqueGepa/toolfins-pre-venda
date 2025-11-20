@@ -739,9 +739,9 @@
                         child.material.metalnessMap = null;
                         // Setar cor base
                         child.material.color.setHex(hexColor);
-                        // Setar emissive para garantir visibilidade
-                        child.material.emissive.setHex(hexColor);
-                        child.material.emissiveIntensity = 0.1;
+                        // Remover emissive para não estourar cores
+                        child.material.emissive.setHex(0x000000);
+                        child.material.emissiveIntensity = 0;
                         child.material.needsUpdate = true;
                     }
                 });
