@@ -510,7 +510,7 @@
 
                         <div class="control-group">
                             <label>Cor Capinha</label>
-                            <input type="color" id="capColorPicker" value="#ff0000">
+                            <input type="color" id="capColorPicker" value="#007bff">
                         </div>
 
                         <div class="control-group">
@@ -734,6 +734,11 @@
                         child.material.color.setHex(0xcccccc); // Cinza claro
                         child.material.metalness = 0.7;
                         child.material.roughness = 0.3;
+                        child.material.needsUpdate = true;
+                    }
+                    // AbrirChavinha001 com azul padrão (mesmo da capinha)
+                    if (child.isMesh && child.name === 'AbrirChavinha001') {
+                        child.material.color.setHex(0x007bff); // Azul
                         child.material.needsUpdate = true;
                     }
                 });
