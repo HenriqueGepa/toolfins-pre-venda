@@ -962,9 +962,18 @@
                         child.material.roughness = 0.3;
                         child.material.needsUpdate = true;
                     }
-                    // AbrirChavinha001 com azul padrão (mesmo da capinha)
+                    // ToolFins_corpo com azul padrão (plástico)
+                    if (child.isMesh && child.name === 'ToolFins_corpo') {
+                        child.material.color.setHex(0x007bff); // Azul
+                        child.material.metalness = 0;
+                        child.material.roughness = 0.3;
+                        child.material.needsUpdate = true;
+                    }
+                    // AbrirChavinha001 com azul padrão (mesmo da capinha - plástico)
                     if (child.isMesh && child.name === 'AbrirChavinha001') {
                         child.material.color.setHex(0x007bff); // Azul
+                        child.material.metalness = 0;
+                        child.material.roughness = 0.3;
                         child.material.needsUpdate = true;
                     }
                 });
@@ -1085,8 +1094,8 @@
                     child.material.roughnessMap = null;
                     child.material.metalnessMap = null;
                     child.material.color.setHex(numColor);
-                    child.material.metalness = 0.1;
-                    child.material.roughness = 0.4;
+                    child.material.metalness = 0;
+                    child.material.roughness = 0.3;
                     child.material.emissive.setHex(0x000000);
                 }
             });
@@ -1101,8 +1110,8 @@
                     child.material.roughnessMap = null;
                     child.material.metalnessMap = null;
                     child.material.color.setHex(numColor);
-                    child.material.metalness = 0.1;
-                    child.material.roughness = 0.4;
+                    child.material.metalness = 0;
+                    child.material.roughness = 0.3;
                     child.material.emissive.setHex(0x000000);
                 }
             });
