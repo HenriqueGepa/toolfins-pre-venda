@@ -899,27 +899,21 @@
             renderer.outputEncoding = THREE.sRGBEncoding;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.2;
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFShadowMapType;
             container.appendChild(renderer.domElement);
 
             // 4. Luzes com HYPER-REALISMO (otimizado e limpo)
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambientLight);
             
-            const topLight = new THREE.DirectionalLight(0xffffff, 1.3);
+            const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
             topLight.position.set(0, 10, 0);
-            topLight.castShadow = true;
-            topLight.shadow.mapSize.width = 2048;
-            topLight.shadow.mapSize.height = 2048;
             scene.add(topLight);
             
-            const frontLight = new THREE.DirectionalLight(0xffffff, 0.7);
+            const frontLight = new THREE.DirectionalLight(0xffffff, 0.8);
             frontLight.position.set(5, 8, 10);
-            frontLight.castShadow = true;
             scene.add(frontLight);
             
-            const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.4);
+            const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.5);
             fillLight.position.set(-8, 6, -5);
             scene.add(fillLight);
 
@@ -954,41 +948,25 @@
                         child.material.color.setHex(0xcccccc);
                         child.material.metalness = 0.8;
                         child.material.roughness = 0.25;
-                        child.material.castShadow = true;
-                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
                     }
                     if (child.isMesh && child.name === 'AbrirChavinha') {
                         child.material.color.setHex(0xcccccc);
                         child.material.metalness = 0.8;
                         child.material.roughness = 0.25;
-                        child.material.castShadow = true;
-                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
                     }
                     if (child.isMesh && child.name === 'ToolFins_corpo') {
                         child.material.color.setHex(0x007bff);
                         child.material.metalness = 0.05;
                         child.material.roughness = 0.35;
-                        child.material.castShadow = true;
-                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
                     }
                     if (child.isMesh && child.name === 'AbrirChavinha001') {
                         child.material.color.setHex(0x007bff);
                         child.material.metalness = 0.05;
                         child.material.roughness = 0.35;
-                        child.material.castShadow = true;
-                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
-                    }
-                });
-
-                // Ativa sombras em todos os meshes para hyper-realismo
-                toolfinsModel.traverse((child) => {
-                    if (child.isMesh) {
-                        child.castShadow = true;
-                        child.receiveShadow = true;
                     }
                 });
 
@@ -1110,8 +1088,6 @@
                     child.material.color.setHex(numColor);
                     child.material.metalness = 0.05;
                     child.material.roughness = 0.35;
-                    child.material.castShadow = true;
-                    child.material.receiveShadow = true;
                     child.material.emissive.setHex(0x000000);
                     child.material.needsUpdate = true;
                 }
@@ -1129,8 +1105,6 @@
                     child.material.color.setHex(numColor);
                     child.material.metalness = 0.05;
                     child.material.roughness = 0.35;
-                    child.material.castShadow = true;
-                    child.material.receiveShadow = true;
                     child.material.emissive.setHex(0x000000);
                     child.material.needsUpdate = true;
                 }
