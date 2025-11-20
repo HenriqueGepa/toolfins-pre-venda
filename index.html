@@ -278,117 +278,98 @@
             position: relative;
             flex-direction: column;
         }
-        .color-picker-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #007bff, #00a8ff);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 168, 255, 0.3);
-        }
-        .color-picker-btn:hover {
-            border-color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0, 168, 255, 0.5);
-            transform: scale(1.05);
-        }
-        .color-picker-dropdown {
-            position: relative;
-            top: 0;
-            left: 0;
-            transform: none;
-            background: rgba(0, 100, 200, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 168, 255, 0.5);
-            border-radius: 15px;
-            padding: 16px;
-            margin-top: 12px;
-            display: none;
-            z-index: 1000;
+        .color-slider-container {
+            display: flex;
             flex-direction: column;
             gap: 12px;
-            min-width: auto;
-            width: 100%;
             align-items: center;
-        }
-        .color-picker-dropdown.show {
-            display: flex;
-        }
-        .dropdown-header {
             width: 100%;
-            text-align: center;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-        .default-color-box {
-            width: 60px;
+        .color-slider {
+            position: relative;
+            width: 100%;
             height: 60px;
-            border-radius: 10px;
-            border: 3px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 4px 12px rgba(0, 168, 255, 0.3);
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .default-color-box:hover {
-            border-color: #ffffff;
-            box-shadow: 0 6px 16px rgba(0, 168, 255, 0.5);
-            transform: scale(1.05);
-        }
-        .dropdown-content {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            width: 100%;
+            align-items: center;
+            cursor: pointer;
         }
-        .color-preset {
-            width: 36px;
-            height: 36px;
+        .color-track {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #007bff 0%, #ff0000 16.66%, #00ff00 33.33%, #ffff00 50%, #ff00ff 66.66%, #00ccff 83.33%, #ff6600 100%);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .color-stop {
+            position: absolute;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            border: 2px solid #ffffff;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
             transition: all 0.2s;
         }
-        .color-preset:hover {
-            border-color: #ffffff;
-            transform: scale(1.15);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        .color-stop:hover {
+            transform: translateY(-50%) scale(1.3);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
         }
-        .color-custom-input {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            padding: 0 !important;
-            margin: 0 !important;
-            box-sizing: border-box !important;
+        .color-range-input {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 10;
             outline: none;
+        }
+        .color-range-input::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid rgba(0, 168, 255, 0.8);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
             transition: all 0.2s;
         }
-        .color-custom-input:hover {
-            border-color: #ffffff;
-            transform: scale(1.1);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        .color-range-input::-webkit-slider-thumb:hover {
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 168, 255, 1);
+            transform: scale(1.15);
         }
-        .color-custom-input::-webkit-color-swatch-wrapper {
-            padding: 0;
+        .color-range-input::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
+            background: white;
+            border: 3px solid rgba(0, 168, 255, 0.8);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s;
         }
-        .color-custom-input::-webkit-color-swatch {
-            border: none;
-            border-radius: 50%;
+        .color-range-input::-moz-range-thumb:hover {
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 168, 255, 1);
+            transform: scale(1.15);
         }
-        .color-custom-input::-moz-color-swatch {
-            border: none;
-            border-radius: 50%;
+        .color-display {
+            width: 80px;
+            height: 50px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 168, 255, 0.4);
+            transition: all 0.2s;
         }
         .color-picker-dropdown button {
             padding: 8px 16px;
@@ -617,14 +598,13 @@
             .controls-panel { flex: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
             .control-group { margin-bottom: 10px; }
             .control-group label { font-size: 0.9rem; margin-bottom: 8px; }
-            .color-picker-wrapper { gap: 10px; }
-            .color-picker-btn { width: 45px; height: 45px; }
-            .color-picker-dropdown { padding: 12px; gap: 10px; }
-            .default-color-box { width: 50px; height: 50px; }
-            .dropdown-header { font-size: 0.8rem; }
-            .dropdown-content { gap: 8px; }
-            .color-preset { width: 32px; height: 32px; }
-            .color-custom-input { width: 40px; height: 40px; }
+            .color-slider-container { gap: 10px; }
+            .color-slider { height: 50px; }
+            .color-track { height: 16px; }
+            .color-range-input { height: 16px; }
+            .color-range-input::-webkit-slider-thumb { width: 20px; height: 20px; }
+            .color-range-input::-moz-range-thumb { width: 20px; height: 20px; }
+            .color-display { width: 70px; height: 45px; }
             .partners-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             .footer-col { padding: 15px 0; }
@@ -643,13 +623,13 @@
             #three-container { height: 300px; }
             .controls-panel { padding: 12px; gap: 12px; }
             .control-group label { font-size: 0.85rem; }
-            .color-picker-btn { width: 40px; height: 40px; }
-            .color-picker-dropdown { padding: 10px; gap: 8px; }
-            .default-color-box { width: 45px; height: 45px; }
-            .dropdown-header { font-size: 0.75rem; }
-            .dropdown-content { gap: 6px; }
-            .color-preset { width: 28px; height: 28px; }
-            .color-custom-input { width: 35px; height: 35px; }
+            .color-slider-container { gap: 8px; }
+            .color-slider { height: 45px; }
+            .color-track { height: 14px; }
+            .color-range-input { height: 14px; }
+            .color-range-input::-webkit-slider-thumb { width: 18px; height: 18px; }
+            .color-range-input::-moz-range-thumb { width: 18px; height: 18px; }
+            .color-display { width: 60px; height: 40px; }
             h2 { font-size: 1.3rem; }
             .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; }
             .gallery-item img { height: 150px; }
@@ -728,49 +708,39 @@
                     <div class="controls-panel">
                         <div class="control-group">
                             <label>Cor Toolfins</label>
-                            <div class="color-picker-wrapper">
-                                <button id="bodyColorPickerBtn" class="color-picker-btn" title="Clique para personalizar cores"></button>
-                                <div class="color-picker-dropdown" id="bodyColorDropdown">
-                                    <div class="dropdown-header">Cor Padrão</div>
-                                    <div class="default-color-box" style="background: #007bff;"></div>
-                                    
-                                    <div class="dropdown-header" style="margin-top: 12px;">Personalizadas</div>
-                                    <div class="dropdown-content">
-                                        <div class="color-preset" style="background: #ff0000;" title="Vermelho" data-color="#ff0000"></div>
-                                        <div class="color-preset" style="background: #00ff00;" title="Verde" data-color="#00ff00"></div>
-                                        <div class="color-preset" style="background: #ffff00;" title="Amarelo" data-color="#ffff00"></div>
-                                        <div class="color-preset" style="background: #ff00ff;" title="Magenta" data-color="#ff00ff"></div>
-                                        <div class="color-preset" style="background: #00ccff;" title="Ciano" data-color="#00ccff"></div>
-                                        <div class="color-preset" style="background: #ff6600;" title="Laranja" data-color="#ff6600"></div>
+                            <div class="color-slider-container">
+                                <div class="color-slider" id="bodyColorSlider">
+                                    <div class="color-track">
+                                        <div class="color-stop" style="background: #007bff; left: 0%;" title="Azul"></div>
+                                        <div class="color-stop" style="background: #ff0000; left: 16.66%;" title="Vermelho"></div>
+                                        <div class="color-stop" style="background: #00ff00; left: 33.33%;" title="Verde"></div>
+                                        <div class="color-stop" style="background: #ffff00; left: 50%;" title="Amarelo"></div>
+                                        <div class="color-stop" style="background: #ff00ff; left: 66.66%;" title="Magenta"></div>
+                                        <div class="color-stop" style="background: #00ccff; left: 83.33%;" title="Ciano"></div>
+                                        <div class="color-stop" style="background: #ff6600; left: 100%;" title="Laranja"></div>
                                     </div>
-                                    
-                                    <div class="dropdown-header" style="margin-top: 12px;">Cor Customizada</div>
-                                    <input type="color" id="bodyColorCustom" class="color-custom-input" value="#007bff" title="Escolha uma cor">
+                                    <input type="range" id="bodyColorInput" class="color-range-input" min="0" max="100" value="0">
                                 </div>
+                                <div class="color-display" id="bodyColorDisplay" style="background: #007bff;"></div>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label>Cor Capinha</label>
-                            <div class="color-picker-wrapper">
-                                <button id="capColorPickerBtn" class="color-picker-btn" title="Clique para personalizar cores"></button>
-                                <div class="color-picker-dropdown" id="capColorDropdown">
-                                    <div class="dropdown-header">Cor Padrão</div>
-                                    <div class="default-color-box" style="background: #007bff;"></div>
-                                    
-                                    <div class="dropdown-header" style="margin-top: 12px;">Personalizadas</div>
-                                    <div class="dropdown-content">
-                                        <div class="color-preset" style="background: #ff0000;" title="Vermelho" data-color="#ff0000"></div>
-                                        <div class="color-preset" style="background: #00ff00;" title="Verde" data-color="#00ff00"></div>
-                                        <div class="color-preset" style="background: #ffff00;" title="Amarelo" data-color="#ffff00"></div>
-                                        <div class="color-preset" style="background: #ff00ff;" title="Magenta" data-color="#ff00ff"></div>
-                                        <div class="color-preset" style="background: #00ccff;" title="Ciano" data-color="#00ccff"></div>
-                                        <div class="color-preset" style="background: #ff6600;" title="Laranja" data-color="#ff6600"></div>
+                            <div class="color-slider-container">
+                                <div class="color-slider" id="capColorSlider">
+                                    <div class="color-track">
+                                        <div class="color-stop" style="background: #007bff; left: 0%;" title="Azul"></div>
+                                        <div class="color-stop" style="background: #ff0000; left: 16.66%;" title="Vermelho"></div>
+                                        <div class="color-stop" style="background: #00ff00; left: 33.33%;" title="Verde"></div>
+                                        <div class="color-stop" style="background: #ffff00; left: 50%;" title="Amarelo"></div>
+                                        <div class="color-stop" style="background: #ff00ff; left: 66.66%;" title="Magenta"></div>
+                                        <div class="color-stop" style="background: #00ccff; left: 83.33%;" title="Ciano"></div>
+                                        <div class="color-stop" style="background: #ff6600; left: 100%;" title="Laranja"></div>
                                     </div>
-                                    
-                                    <div class="dropdown-header" style="margin-top: 12px;">Cor Customizada</div>
-                                    <input type="color" id="capColorCustom" class="color-custom-input" value="#007bff" title="Escolha uma cor">
+                                    <input type="range" id="capColorInput" class="color-range-input" min="0" max="100" value="0">
                                 </div>
+                                <div class="color-display" id="capColorDisplay" style="background: #007bff;"></div>
                             </div>
                         </div>
 
@@ -1043,101 +1013,32 @@
             renderer.render(scene, camera);
         }
         // --- Interações ---
-        // Mostrar/esconder dropdown do color picker
-        const bodyColorDropdown = document.getElementById('bodyColorDropdown');
-        const capColorDropdown = document.getElementById('capColorDropdown');
-        const bodyColorPickerBtn = document.getElementById('bodyColorPickerBtn');
-        const capColorPickerBtn = document.getElementById('capColorPickerBtn');
-
-        // Armazenar cores atuais
-        let bodyCurrentColor = '#007bff';
-        let capCurrentColor = '#007bff';
-
-        // Abrir/fechar dropdowns com botões
-        if (bodyColorPickerBtn && bodyColorDropdown) {
-            bodyColorPickerBtn.addEventListener('click', () => {
-                bodyColorDropdown.classList.toggle('show');
-                capColorDropdown.classList.remove('show');
-            });
-        }
-
-        if (capColorPickerBtn && capColorDropdown) {
-            capColorPickerBtn.addEventListener('click', () => {
-                capColorDropdown.classList.toggle('show');
-                bodyColorDropdown.classList.remove('show');
-            });
-        }
-
-        // Fechar dropdown ao clicar fora
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.color-picker-wrapper')) {
-                bodyColorDropdown.classList.remove('show');
-                capColorDropdown.classList.remove('show');
-            }
-        });
-
-        // Lidar com cliques na cor padrão
-        const defaultColorBoxes = document.querySelectorAll('.default-color-box');
-        defaultColorBoxes.forEach(box => {
-            box.addEventListener('click', (e) => {
-                const dropdown = e.target.closest('.color-picker-dropdown');
-                const defaultColor = '#007bff';
-                
-                if (dropdown.id === 'bodyColorDropdown') {
-                    bodyCurrentColor = defaultColor;
-                    bodyColorPickerBtn.style.background = `linear-gradient(135deg, ${defaultColor}, ${defaultColor})`;
-                    applyBodyColor(defaultColor);
-                    bodyColorDropdown.classList.remove('show');
-                } else if (dropdown.id === 'capColorDropdown') {
-                    capCurrentColor = defaultColor;
-                    capColorPickerBtn.style.background = `linear-gradient(135deg, ${defaultColor}, ${defaultColor})`;
-                    applyCapColor(defaultColor);
-                    capColorDropdown.classList.remove('show');
-                }
-            });
-        });
-
-        // Lidar com cliques nos presets de cor
-        const colorPresets = document.querySelectorAll('.color-preset');
-        colorPresets.forEach(preset => {
-            preset.addEventListener('click', (e) => {
-                const color = e.target.dataset.color;
-                const dropdown = e.target.closest('.color-picker-dropdown');
-                
-                if (dropdown.id === 'bodyColorDropdown') {
-                    bodyCurrentColor = color;
-                    bodyColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
-                    applyBodyColor(color);
-                    bodyColorDropdown.classList.remove('show');
-                } else if (dropdown.id === 'capColorDropdown') {
-                    capCurrentColor = color;
-                    capColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
-                    applyCapColor(color);
-                    capColorDropdown.classList.remove('show');
-                }
-            });
-        });
-
-        // Lidar com input color customizado no dropdown
-        const bodyColorCustom = document.getElementById('bodyColorCustom');
-        if (bodyColorCustom) {
-            bodyColorCustom.addEventListener('input', (e) => {
-                const color = e.target.value;
-                bodyCurrentColor = color;
-                bodyColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+        // --- Slider de cores ---
+        const colors = ['#007bff', '#ff0000', '#00ff00', '#ffff00', '#ff00ff', '#00ccff', '#ff6600'];
+        
+        // Body color slider
+        const bodyColorInput = document.getElementById('bodyColorInput');
+        const bodyColorDisplay = document.getElementById('bodyColorDisplay');
+        
+        if (bodyColorInput) {
+            bodyColorInput.addEventListener('input', (e) => {
+                const index = Math.round((e.target.value / 100) * (colors.length - 1));
+                const color = colors[index];
+                bodyColorDisplay.style.background = color;
                 applyBodyColor(color);
-                bodyColorDropdown.classList.remove('show');
             });
         }
-
-        const capColorCustom = document.getElementById('capColorCustom');
-        if (capColorCustom) {
-            capColorCustom.addEventListener('input', (e) => {
-                const color = e.target.value;
-                capCurrentColor = color;
-                capColorPickerBtn.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+        
+        // Cap color slider
+        const capColorInput = document.getElementById('capColorInput');
+        const capColorDisplay = document.getElementById('capColorDisplay');
+        
+        if (capColorInput) {
+            capColorInput.addEventListener('input', (e) => {
+                const index = Math.round((e.target.value / 100) * (colors.length - 1));
+                const color = colors[index];
+                capColorDisplay.style.background = color;
                 applyCapColor(color);
-                capColorDropdown.classList.remove('show');
             });
         }
 
@@ -1173,8 +1074,6 @@
                 }
             });
         }
-
-        // Color picker do corpo - REMOVIDO (usando funções acima agora)
 
         // Color picker do corpo (se existir)
 
