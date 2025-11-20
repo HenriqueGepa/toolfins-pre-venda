@@ -232,6 +232,20 @@
             position: relative;
         }
         
+        /* Ocultar controle de volume nos vídeos de função */
+        .gallery-item video::-webkit-media-controls-volume-slider {
+            display: none;
+        }
+        .gallery-item video::-webkit-media-controls-mute-button {
+            display: none;
+        }
+        .gallery-item video::-moz-media-controls-volume-slider {
+            display: none;
+        }
+        .gallery-item video::-moz-media-controls-mute-button {
+            display: none;
+        }
+        
         .controls-panel {
             flex: 1;
             padding: 20px;
