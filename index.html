@@ -646,7 +646,20 @@
 
             // 1. Cena
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x808080); // Cinza escuro
+            
+            // Criar gradiente de fundo (cinza claro no topo, cinza escuro embaixo)
+            const canvas = document.createElement('canvas');
+            canvas.width = 256;
+            canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            const gradient = ctx.createLinearGradient(0, 0, 0, 256);
+            gradient.addColorStop(0, '#b0b0b0');    // Cinza claro no topo
+            gradient.addColorStop(1, '#606060');    // Cinza escuro embaixo
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 256, 256);
+            
+            const texture = new THREE.CanvasTexture(canvas);
+            scene.background = texture;
 
             // 2. Câmera
             camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
