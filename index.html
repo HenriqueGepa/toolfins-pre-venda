@@ -98,8 +98,9 @@
         .hero-section { background: linear-gradient(to bottom, #0d0d0d, #1a2a3a); }
         .hero-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: 50px;
         }
         .hero-text { flex: 1; }
@@ -117,7 +118,7 @@
             max-width: 400px;
             margin: 0 auto;
         }
-        .hero-video-wrapper video { width: 100%; height: auto; aspect-ratio: 9/16; object-fit: cover; }
+        .hero-video-wrapper video { width: 100%; height: auto; aspect-ratio: 9/16; object-fit: contain; }
 
         /* 2. 3D INTERATIVO */
         .interactive-wrapper {
@@ -193,7 +194,7 @@
 
         /* 4. LISTA DE INTERESSE */
         .interest-section {
-            background: linear-gradient(135deg, #00a8ff, #0088cc);
+            background: transparent;
             color: #ffffff;
             padding: 100px 0;
         }
