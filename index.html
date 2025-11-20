@@ -253,7 +253,46 @@
             flex-direction: column;
             justify-content: center;
         }
-        .control-group { margin-bottom: 15px; }
+        .control-group { margin-bottom: 15px; position: relative; }
+        .color-picker-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .color-picker-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 5px;
+            display: none;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 120px;
+        }
+        .color-picker-dropdown.show {
+            display: flex;
+        }
+        .color-picker-dropdown button {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            background: rgba(0, 168, 255, 0.15);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            border-radius: 5px;
+            cursor: pointer;
+            color: #e0e0e0;
+            transition: background 0.2s;
+        }
+        .color-picker-dropdown button:hover {
+            background: rgba(0, 168, 255, 0.25);
+        }
         .control-group input[type="color"] {
             width: 40px;
             height: 40px;
@@ -536,17 +575,21 @@
                     <div class="controls-panel">
                         <div class="control-group">
                             <label>Cor Toolfins</label>
-                            <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+                            <div class="color-picker-wrapper">
                                 <input type="color" id="bodyColorPicker" value="#007bff">
-                                <button id="resetBodyColor" class="btn-action" style="padding: 6px 12px; font-size: 0.8rem;">Padrão</button>
+                                <div class="color-picker-dropdown" id="bodyColorDropdown">
+                                    <button id="resetBodyColor">Padrão</button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label>Cor Capinha</label>
-                            <div style="display: flex; gap: 8px; align-items: center; justify-content: center;">
+                            <div class="color-picker-wrapper">
                                 <input type="color" id="capColorPicker" value="#007bff">
-                                <button id="resetCapColor" class="btn-action" style="padding: 6px 12px; font-size: 0.8rem;">Padrão</button>
+                                <div class="color-picker-dropdown" id="capColorDropdown">
+                                    <button id="resetCapColor">Padrão</button>
+                                </div>
                             </div>
                         </div>
 
@@ -820,8 +863,36 @@
         }
 
         // --- Interações ---
-        // Color picker do corpo (se existir)
+        // Mostrar/esconder dropdown do color picker
+        const bodyColorDropdown = document.getElementById('bodyColorDropdown');
+        const capColorDropdown = document.getElementById('capColorDropdown');
+
         const bodyColorPicker = document.getElementById('bodyColorPicker');
+        if (bodyColorPicker && bodyColorDropdown) {
+            bodyColorPicker.addEventListener('click', () => {
+                bodyColorDropdown.classList.toggle('show');
+                capColorDropdown.classList.remove('show');
+            });
+        }
+
+        const capColorPickerDropdown = document.getElementById('capColorPicker');
+        if (capColorPickerDropdown && capColorDropdown) {
+            capColorPickerDropdown.addEventListener('click', () => {
+                capColorDropdown.classList.toggle('show');
+                bodyColorDropdown.classList.remove('show');
+            });
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.color-picker-wrapper')) {
+                bodyColorDropdown.classList.remove('show');
+                capColorDropdown.classList.remove('show');
+            }
+        });
+
+        // Color picker do corpo (se existir)
+        const bodyColorPickerInput = document.getElementById('bodyColorPicker');
         if (bodyColorPicker) {
             bodyColorPicker.addEventListener('input', (e) => {
                 if (!toolfinsModel) return;
@@ -844,9 +915,9 @@
         }
 
         // Color picker da capinha
-        const capColorPicker = document.getElementById('capColorPicker');
-        if (capColorPicker) {
-            capColorPicker.addEventListener('input', (e) => {
+        const capColorPickerInput = document.getElementById('capColorPicker');
+        if (capColorPickerInput) {
+            capColorPickerInput.addEventListener('input', (e) => {
                 if (!toolfinsModel) return;
                 const hexColor = parseInt(e.target.value.slice(1), 16);
                 toolfinsModel.traverse((child) => {
