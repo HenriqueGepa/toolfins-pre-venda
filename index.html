@@ -750,8 +750,11 @@
             bodyColorPicker.addEventListener('input', (e) => {
                 if (!toolfinsModel) return;
                 toolfinsModel.traverse((child) => {
-                    if (child.isMesh && child.name === 'Toolfins_Corpo') { 
-                        child.material.color.set(e.target.value);
+                    if (child.isMesh && child.name === 'Toolfins_Corpo') {
+                        // Forçar a cor mesmo que haja texturas ou outros materiais
+                        if (child.material.map) child.material.map = null;
+                        child.material.color.setHex(parseInt(e.target.value.slice(1), 16));
+                        child.material.needsUpdate = true;
                     }
                 });
             });
@@ -763,8 +766,11 @@
             capColorPicker.addEventListener('input', (e) => {
                 if (!toolfinsModel) return;
                 toolfinsModel.traverse((child) => {
-                    if (child.isMesh && child.name === 'Capinha') { 
-                        child.material.color.set(e.target.value);
+                    if (child.isMesh && child.name === 'Capinha') {
+                        // Forçar a cor mesmo que haja texturas ou outros materiais
+                        if (child.material.map) child.material.map = null;
+                        child.material.color.setHex(parseInt(e.target.value.slice(1), 16));
+                        child.material.needsUpdate = true;
                     }
                 });
             });
