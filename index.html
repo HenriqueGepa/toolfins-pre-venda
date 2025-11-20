@@ -891,36 +891,61 @@
             camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
             camera.position.set(0, 2, 5);
 
-            // 3. Renderizador
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            // 3. Renderizador com HIGH QUALITY SETTINGS
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, precision: 'highp' });
             renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.gammaOutput = true;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFShadowMapType;
             container.appendChild(renderer.domElement);
 
-            // 4. Luzes
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            // 4. Luzes com HYPER-REALISMO
+            const ambientLight = new THREE.AmbientLight(0xf0f4ff, 0.5);
             scene.add(ambientLight);
             
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-            dirLight.position.set(5, 10, 7);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            dirLight.position.set(8, 12, 8);
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 2048;
+            dirLight.shadow.mapSize.height = 2048;
             scene.add(dirLight);
             
-            // Luz vindo de cima para iluminar bem
-            const topLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            topLight.position.set(0, 8, 0);
+            const topLight = new THREE.DirectionalLight(0xffffff, 1.4);
+            topLight.position.set(0, 10, 0);
+            topLight.castShadow = true;
             scene.add(topLight);
             
-            // Spotlight tipo abajur vindo de cima para baixo
-            const spotlight = new THREE.SpotLight(0xffffff, 1.5, 20, Math.PI / 4, 0.8, 1);
-            spotlight.position.set(0, 10, 0);
+            const spotlight = new THREE.SpotLight(0xffffff, 2, 25, Math.PI / 3.5, 0.7, 1);
+            spotlight.position.set(2, 12, 3);
             spotlight.target.position.set(0, 0, 0);
+            spotlight.castShadow = true;
             scene.add(spotlight);
             scene.add(spotlight.target);
             
-            // Luz vindo de baixo para iluminar a parte inferior
-            const bottomLight = new THREE.DirectionalLight(0xffffff, 0.4);
-            bottomLight.position.set(0, -5, 0);
+            const fillLight = new THREE.DirectionalLight(0xc8d8ff, 0.6);
+            fillLight.position.set(-8, 8, -5);
+            scene.add(fillLight);
+            
+            const bottomLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            bottomLight.position.set(0, -6, 0);
             scene.add(bottomLight);
+            
+            const rimLight = new THREE.DirectionalLight(0x00a8ff, 0.3);
+            rimLight.position.set(0, 5, -10);
+            scene.add(rimLight);
+
+            // Plane para receber sombras
+            const planeGeometry = new THREE.PlaneGeometry(20, 20);
+            const planeMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
+            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.receiveShadow = true;
+            plane.rotation.x = -Math.PI / 2;
+            plane.position.y = -2;
+            scene.add(plane);
 
             // 5. Controles
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -950,31 +975,44 @@
                 // Colorir parafuso com cinza metálico e AbrirChavinha com mesma cor
                 toolfinsModel.traverse((child) => {
                     if (child.isMesh && child.name === 'Parafuso+porca') {
-                        child.material.color.setHex(0xcccccc); // Cinza claro
-                        child.material.metalness = 0.7;
-                        child.material.roughness = 0.3;
+                        child.material.color.setHex(0xcccccc);
+                        child.material.metalness = 0.8;
+                        child.material.roughness = 0.25;
+                        child.material.castShadow = true;
+                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
                     }
-                    // AbrirChavinha com mesma cor do parafuso
                     if (child.isMesh && child.name === 'AbrirChavinha') {
-                        child.material.color.setHex(0xcccccc); // Cinza claro
-                        child.material.metalness = 0.7;
-                        child.material.roughness = 0.3;
+                        child.material.color.setHex(0xcccccc);
+                        child.material.metalness = 0.8;
+                        child.material.roughness = 0.25;
+                        child.material.castShadow = true;
+                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
                     }
-                    // ToolFins_corpo com azul padrão (plástico)
                     if (child.isMesh && child.name === 'ToolFins_corpo') {
-                        child.material.color.setHex(0x007bff); // Azul
-                        child.material.metalness = 0;
-                        child.material.roughness = 0.3;
+                        child.material.color.setHex(0x007bff);
+                        child.material.metalness = 0.05;
+                        child.material.roughness = 0.35;
+                        child.material.castShadow = true;
+                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
                     }
-                    // AbrirChavinha001 com azul padrão (mesmo da capinha - plástico)
                     if (child.isMesh && child.name === 'AbrirChavinha001') {
-                        child.material.color.setHex(0x007bff); // Azul
-                        child.material.metalness = 0;
-                        child.material.roughness = 0.3;
+                        child.material.color.setHex(0x007bff);
+                        child.material.metalness = 0.05;
+                        child.material.roughness = 0.35;
+                        child.material.castShadow = true;
+                        child.material.receiveShadow = true;
                         child.material.needsUpdate = true;
+                    }
+                });
+
+                // Ativa sombras em todos os meshes para hyper-realismo
+                toolfinsModel.traverse((child) => {
+                    if (child.isMesh) {
+                        child.castShadow = true;
+                        child.receiveShadow = true;
                     }
                 });
 
@@ -1094,9 +1132,12 @@
                     child.material.roughnessMap = null;
                     child.material.metalnessMap = null;
                     child.material.color.setHex(numColor);
-                    child.material.metalness = 0;
-                    child.material.roughness = 0.3;
+                    child.material.metalness = 0.05;
+                    child.material.roughness = 0.35;
+                    child.material.castShadow = true;
+                    child.material.receiveShadow = true;
                     child.material.emissive.setHex(0x000000);
+                    child.material.needsUpdate = true;
                 }
             });
         }
@@ -1110,9 +1151,12 @@
                     child.material.roughnessMap = null;
                     child.material.metalnessMap = null;
                     child.material.color.setHex(numColor);
-                    child.material.metalness = 0;
-                    child.material.roughness = 0.3;
+                    child.material.metalness = 0.05;
+                    child.material.roughness = 0.35;
+                    child.material.castShadow = true;
+                    child.material.receiveShadow = true;
                     child.material.emissive.setHex(0x000000);
+                    child.material.needsUpdate = true;
                 }
             });
         }
