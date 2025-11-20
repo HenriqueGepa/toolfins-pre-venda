@@ -669,15 +669,15 @@
             container.appendChild(renderer.domElement);
 
             // 4. Luzes
-            const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
             scene.add(ambientLight);
             
-            const dirLight = new THREE.DirectionalLight(0xffffff, 2.5);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
             dirLight.position.set(5, 10, 7);
             scene.add(dirLight);
             
             // Luz vindo de baixo para iluminar a parte inferior
-            const bottomLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            const bottomLight = new THREE.DirectionalLight(0xffffff, 0.8);
             bottomLight.position.set(0, -5, 0);
             scene.add(bottomLight);
 
@@ -747,7 +747,7 @@
                 if (!toolfinsModel) return;
                 const hexColor = parseInt(e.target.value.slice(1), 16);
                 toolfinsModel.traverse((child) => {
-                    if (child.isMesh && child.name === 'Toolfins_Corpo') {
+                    if (child.isMesh && child.name === 'ToolFins_3d_test_1') {
                         // Limpar texturas e mapas
                         child.material.map = null;
                         child.material.roughnessMap = null;
