@@ -503,8 +503,13 @@
 
                     <div class="controls-panel">
                         <div class="control-group">
-                            <label>Cor do ToolFins</label>
+                            <label>Cor do Corpo</label>
                             <input type="color" id="bodyColorPicker" value="#007bff">
+                        </div>
+
+                        <div class="control-group">
+                            <label>Cor da Capinha</label>
+                            <input type="color" id="capColorPicker" value="#ff0000">
                         </div>
 
                         <div class="control-group">
@@ -745,7 +750,7 @@
             bodyColorPicker.addEventListener('input', (e) => {
                 if (!toolfinsModel) return;
                 toolfinsModel.traverse((child) => {
-                    if (child.isMesh && (child.name.includes('Corpo') || child.name.includes('Body'))) { 
+                    if (child.isMesh && child.name === 'Toolfins_Corpo') { 
                         child.material.color.set(e.target.value);
                     }
                 });
@@ -758,7 +763,7 @@
             capColorPicker.addEventListener('input', (e) => {
                 if (!toolfinsModel) return;
                 toolfinsModel.traverse((child) => {
-                    if (child.isMesh && (child.name.includes('Capa') || child.name.includes('Cap'))) { 
+                    if (child.isMesh && child.name === 'Capinha') { 
                         child.material.color.set(e.target.value);
                     }
                 });
