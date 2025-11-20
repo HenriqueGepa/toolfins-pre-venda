@@ -726,33 +726,42 @@
         }
 
         // --- Interações ---
-        document.getElementById('bodyColorPicker').addEventListener('input', (e) => {
-            if (!toolfinsModel) return;
-            toolfinsModel.traverse((child) => {
-                // Ajuste o nome 'Corpo' conforme o nome da malha no seu arquivo 3D
-                if (child.isMesh && (child.name.includes('Corpo') || child.name.includes('Body'))) { 
-                    child.material.color.set(e.target.value);
-                }
+        // Color picker do corpo (se existir)
+        const bodyColorPicker = document.getElementById('bodyColorPicker');
+        if (bodyColorPicker) {
+            bodyColorPicker.addEventListener('input', (e) => {
+                if (!toolfinsModel) return;
+                toolfinsModel.traverse((child) => {
+                    if (child.isMesh && (child.name.includes('Corpo') || child.name.includes('Body'))) { 
+                        child.material.color.set(e.target.value);
+                    }
+                });
             });
-        });
+        }
 
-        document.getElementById('capColorPicker').addEventListener('input', (e) => {
-            if (!toolfinsModel) return;
-            toolfinsModel.traverse((child) => {
-                // Ajuste o nome 'Capa' conforme o nome da malha no seu arquivo 3D
-                if (child.isMesh && (child.name.includes('Capa') || child.name.includes('Cap'))) { 
-                    child.material.color.set(e.target.value);
-                }
+        // Color picker da capa (se existir)
+        const capColorPicker = document.getElementById('capColorPicker');
+        if (capColorPicker) {
+            capColorPicker.addEventListener('input', (e) => {
+                if (!toolfinsModel) return;
+                toolfinsModel.traverse((child) => {
+                    if (child.isMesh && (child.name.includes('Capa') || child.name.includes('Cap'))) { 
+                        child.material.color.set(e.target.value);
+                    }
+                });
             });
-        });
+        }
 
-        let isKeyOpen = false;
-        document.getElementById('toggleFinKey').addEventListener('click', () => {
-            if(!mixer) {
-                alert('Modelo 3D não carregado ou sem animações.');
-                return;
-            }
-            // Tenta pegar a primeira animação disponível se não souber o nome
+        // Botão de toggle da chavinha (se existir)
+        const toggleFinKey = document.getElementById('toggleFinKey');
+        if (toggleFinKey) {
+            let isKeyOpen = false;
+            toggleFinKey.addEventListener('click', () => {
+                if(!mixer) {
+                    alert('Modelo 3D não carregado ou sem animações.');
+                    return;
+                }
+                // Tenta pegar a primeira animação disponível se não souber o nome
             const actionName = Object.keys(animationActions)[0];
             if (actionName) {
                 const action = animationActions[actionName];
@@ -771,7 +780,8 @@
                     isKeyOpen = false;
                 }
             }
-        });
+            });
+        }
 
         // Formulário
         document.querySelector('.interest-form').addEventListener('submit', (e) => {
