@@ -772,6 +772,22 @@
             window.scrollTo(0, 0);
         });
 
+        // Reset ao recarregar a página
+        if (performance.navigation.type === 1) {
+            // Recarregar - limpar estados
+            window.scrollTo(0, 0);
+        }
+
+        // Garantir que volta ao topo ao carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+            // Fechar menu se estiver aberto no mobile
+            if (menuToggle && navMenu) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('mobile-open');
+            }
+        });
+
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
     </script>
