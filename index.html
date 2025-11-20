@@ -266,6 +266,19 @@
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
+            outline: none;
+        }
+        .control-group input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+            border-radius: 50%;
+        }
+        .control-group input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
+        }
+        .control-group input[type="color"]::-moz-color-swatch {
+            border: none;
+            border-radius: 50%;
         }
         .control-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #e0e0e0; }
         .btn-action {
