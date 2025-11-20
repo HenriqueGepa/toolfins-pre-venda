@@ -758,30 +758,41 @@
             });
         });
 
-        // Scroll para o topo ao carregar a página - Solução robusta
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-
-        window.addEventListener('beforeunload', () => {
+        // Função para forçar scroll ao topo
+        function scrollToTop() {
             window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
+
+        // Executar ao carregar
+        scrollToTop();
+
+        // Scroll para o topo ao carregar a página - Solução robusta
+        window.addEventListener('load', () => {
+            scrollToTop();
+            setTimeout(scrollToTop, 100);
         });
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-            }, 0);
+        window.addEventListener('beforeunload', () => {
+            scrollToTop();
         });
 
         // Garantir que volta ao topo ao carregar
         document.addEventListener('DOMContentLoaded', () => {
-            window.scrollTo(0, 0);
+            scrollToTop();
+            setTimeout(scrollToTop, 50);
             // Fechar menu se estiver aberto no mobile
             if (menuToggle && navMenu) {
                 menuToggle.classList.remove('active');
                 navMenu.classList.remove('mobile-open');
+            }
+        });
+
+        // Forçar scroll ao topo quando página fica visível (ao voltar da outra aba)
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                scrollToTop();
             }
         });
 
