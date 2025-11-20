@@ -680,7 +680,10 @@
             // 6. Carregar Modelo
             // Carregando do arquivo na raiz do projeto
             const loader = new THREE.GLTFLoader();
+            console.log('Iniciando carregamento do modelo 3D: toolfins.glb');
+            
             loader.load('toolfins.glb', function (gltf) {
+                console.log('✓ Modelo 3D carregado com sucesso!', gltf);
                 toolfinsModel = gltf.scene;
                 scene.add(toolfinsModel);
 
@@ -691,6 +694,7 @@
 
                 // Configura animações
                 if (gltf.animations && gltf.animations.length > 0) {
+                    console.log('Animações encontradas:', gltf.animations.length);
                     mixer = new THREE.AnimationMixer(toolfinsModel);
                     gltf.animations.forEach((clip) => {
                         const action = mixer.clipAction(clip);
@@ -698,8 +702,13 @@
                     });
                 }
                 animate();
-            }, undefined, function (error) {
-                console.warn('Modelo 3D não encontrado. Certifique-se de criar a pasta assets/models e colocar o arquivo .glb');
+            }, 
+            function (progress) {
+                console.log('Progresso do carregamento:', (progress.loaded / progress.total * 100).toFixed(2) + '%');
+            }, 
+            function (error) {
+                console.error('❌ Erro ao carregar modelo 3D:', error);
+                console.warn('Verifique se o arquivo toolfins.glb está na raiz do projeto');
             });
 
             window.addEventListener('resize', () => {
