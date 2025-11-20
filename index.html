@@ -505,7 +505,11 @@
                 <span class="subtitle">Gire, dê zoom e escolha suas cores preferidas.</span>
 
                 <div class="interactive-wrapper">
-                    <div id="three-container"></div>
+                    <div id="three-container" style="position: relative;">
+                        <button id="toggleFinKey" class="btn-action" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; background: rgba(0, 168, 255, 0.7); backdrop-filter: blur(10px);">
+                            Abrir / Fechar Chavinha
+                        </button>
+                    </div>
 
                     <div class="controls-panel">
                         <div class="control-group">
@@ -524,11 +528,6 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <button id="toggleFinKey" class="btn-action">
-                                Abrir / Fechar Chavinha
-                            </button>
-                        </div>
                         <p style="font-size: 0.8rem; color: #888; text-align: center;">*Visualização ilustrativa.</p>
                     </div>
                 </div>
