@@ -523,20 +523,11 @@
         <section id="interesse" class="interest-section">
             <div class="container interest-container">
                 <div class="interest-content">
-                    <h2>Garanta o Lote de Lançamento</h2>
+                    <h2>Tenho interesse</h2>
                     <p>Inscreva-se na lista VIP para receber descontos exclusivos e prioridade total no lançamento.</p>
                     
                     <form class="interest-form">
-                        <input type="text" placeholder="Seu Nome Completo" required>
-                        <input type="email" placeholder="Seu Melhor E-mail" required>
-                        <select required>
-                            <option value="" disabled selected>Qual sua prancha principal?</option>
-                            <option value="shortboard">Shortboard (Pranchinha)</option>
-                            <option value="longboard">Longboard</option>
-                            <option value="funboard">Funboard</option>
-                            <option value="sup">SUP</option>
-                        </select>
-                        <button type="submit" class="btn-cta btn-full">Quero Entrar na Lista VIP</button>
+                        <button type="button" class="btn-cta btn-full" onclick="window.location.href='#';">Quero Entrar na Lista VIP</button>
                     </form>
                 </div>
             </div>
@@ -767,16 +758,22 @@
             });
         });
 
-        // Scroll para o topo ao carregar a página
-        window.addEventListener('load', () => {
+        // Scroll para o topo ao carregar a página - Solução robusta
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        window.addEventListener('beforeunload', () => {
             window.scrollTo(0, 0);
         });
 
-        // Reset ao recarregar a página
-        if (performance.navigation.type === 1) {
-            // Recarregar - limpar estados
-            window.scrollTo(0, 0);
-        }
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
+            }, 0);
+        });
 
         // Garantir que volta ao topo ao carregar
         document.addEventListener('DOMContentLoaded', () => {
