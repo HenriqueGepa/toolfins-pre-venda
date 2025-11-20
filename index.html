@@ -505,12 +505,18 @@
                     <div class="controls-panel">
                         <div class="control-group">
                             <label>Cor Toolfins</label>
-                            <input type="color" id="bodyColorPicker" value="#007bff">
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="color" id="bodyColorPicker" value="#007bff">
+                                <button id="resetBodyColor" class="btn-action" style="padding: 8px 15px; font-size: 0.9rem;">Padrão</button>
+                            </div>
                         </div>
 
                         <div class="control-group">
                             <label>Cor Capinha</label>
-                            <input type="color" id="capColorPicker" value="#007bff">
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="color" id="capColorPicker" value="#007bff">
+                                <button id="resetCapColor" class="btn-action" style="padding: 8px 15px; font-size: 0.9rem;">Padrão</button>
+                            </div>
                         </div>
 
                         <div class="control-group">
@@ -820,6 +826,24 @@
                         child.material.needsUpdate = true;
                     }
                 });
+            });
+        }
+
+        // Botão reset Toolfins
+        const resetBodyColor = document.getElementById('resetBodyColor');
+        if (resetBodyColor) {
+            resetBodyColor.addEventListener('click', () => {
+                bodyColorPicker.value = '#007bff';
+                bodyColorPicker.dispatchEvent(new Event('input'));
+            });
+        }
+
+        // Botão reset Capinha
+        const resetCapColor = document.getElementById('resetCapColor');
+        if (resetCapColor) {
+            resetCapColor.addEventListener('click', () => {
+                capColorPicker.value = '#007bff';
+                capColorPicker.dispatchEvent(new Event('input'));
             });
         }
 
