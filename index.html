@@ -1052,52 +1052,26 @@
         // Body color slider
         const bodyColorInput = document.getElementById('bodyColorInput');
         const bodyColorDisplay = document.getElementById('bodyColorDisplay');
-        const bodyColorSlider = document.getElementById('bodyColorSlider');
         
-        if (bodyColorInput && bodyColorSlider) {
+        if (bodyColorInput) {
             // Input event (quando o slider é arrastado)
             bodyColorInput.addEventListener('input', (e) => {
                 const color = getColorFromValue(e.target.value);
                 bodyColorDisplay.style.background = color;
                 applyBodyColor(color);
             });
-            
-            // Mouse move event (para mostrar preview ao passar o mouse)
-            bodyColorSlider.addEventListener('mousemove', (e) => {
-                const rect = bodyColorSlider.getBoundingClientRect();
-                const percentage = ((e.clientX - rect.left) / rect.width) * 100;
-                if (percentage >= 0 && percentage <= 100) {
-                    const color = getColorFromValue(percentage);
-                    bodyColorDisplay.style.background = color;
-                    applyBodyColor(color);
-                    bodyColorInput.value = percentage;
-                }
-            });
         }
         
         // Cap color slider
         const capColorInput = document.getElementById('capColorInput');
         const capColorDisplay = document.getElementById('capColorDisplay');
-        const capColorSlider = document.getElementById('capColorSlider');
         
-        if (capColorInput && capColorSlider) {
+        if (capColorInput) {
             // Input event (quando o slider é arrastado)
             capColorInput.addEventListener('input', (e) => {
                 const color = getColorFromValue(e.target.value);
                 capColorDisplay.style.background = color;
                 applyCapColor(color);
-            });
-            
-            // Mouse move event (para mostrar preview ao passar o mouse)
-            capColorSlider.addEventListener('mousemove', (e) => {
-                const rect = capColorSlider.getBoundingClientRect();
-                const percentage = ((e.clientX - rect.left) / rect.width) * 100;
-                if (percentage >= 0 && percentage <= 100) {
-                    const color = getColorFromValue(percentage);
-                    capColorDisplay.style.background = color;
-                    applyCapColor(color);
-                    capColorInput.value = percentage;
-                }
             });
         }
 
