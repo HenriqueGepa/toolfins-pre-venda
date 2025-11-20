@@ -509,6 +509,11 @@
                         </div>
 
                         <div class="control-group">
+                            <label>Cor Capinha</label>
+                            <input type="color" id="capColorPicker" value="#ff0000">
+                        </div>
+
+                        <div class="control-group">
                             <button id="toggleFinKey" class="btn-action">
                                 Abrir / Fechar Chavinha
                             </button>
@@ -696,7 +701,7 @@
                 const center = box.getCenter(new THREE.Vector3());
                 toolfinsModel.position.sub(center);
 
-                // Colorir parafuso com cinza metálico
+                // Colorir parafuso com cinza metálico e AbrirChavinha com mesma cor
                 toolfinsModel.traverse((child) => {
                     if (child.isMesh && child.name === 'Parafuso+porca') {
                         child.material.color.setHex(0xcccccc); // Cinza claro
@@ -704,8 +709,8 @@
                         child.material.roughness = 0.3;
                         child.material.needsUpdate = true;
                     }
-                    // Colorir ToolFins_3d_test_2 também com cinza metálico
-                    if (child.isMesh && child.name === 'ToolFins_3d_test_2') {
+                    // AbrirChavinha com mesma cor do parafuso
+                    if (child.isMesh && child.name === 'AbrirChavinha') {
                         child.material.color.setHex(0xcccccc); // Cinza claro
                         child.material.metalness = 0.7;
                         child.material.roughness = 0.3;
@@ -754,7 +759,30 @@
                 if (!toolfinsModel) return;
                 const hexColor = parseInt(e.target.value.slice(1), 16);
                 toolfinsModel.traverse((child) => {
-                    if (child.isMesh && child.name === 'ToolFins_3d_test_1') {
+                    if (child.isMesh && child.name === 'ToolFins_corpo') {
+                        // Limpar texturas e mapas
+                        child.material.map = null;
+                        child.material.roughnessMap = null;
+                        child.material.metalnessMap = null;
+                        // Setar cor base
+                        child.material.color.setHex(hexColor);
+                        // Remover emissive para não estourar cores
+                        child.material.emissive.setHex(0x000000);
+                        child.material.emissiveIntensity = 0;
+                        child.material.needsUpdate = true;
+                    }
+                });
+            });
+        }
+
+        // Color picker da capinha
+        const capColorPicker = document.getElementById('capColorPicker');
+        if (capColorPicker) {
+            capColorPicker.addEventListener('input', (e) => {
+                if (!toolfinsModel) return;
+                const hexColor = parseInt(e.target.value.slice(1), 16);
+                toolfinsModel.traverse((child) => {
+                    if (child.isMesh && child.name === 'AbrirChavinha001') {
                         // Limpar texturas e mapas
                         child.material.map = null;
                         child.material.roughnessMap = null;
