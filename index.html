@@ -113,8 +113,10 @@
             line-height: 0;
             position: relative;
             background: #000;
+            max-width: 400px;
+            margin: 0 auto;
         }
-        .hero-video-wrapper video { width: 100%; height: auto; }
+        .hero-video-wrapper video { width: 100%; height: auto; aspect-ratio: 9/16; object-fit: cover; }
 
         /* 2. 3D INTERATIVO */
         .interactive-section { background-color: var(--bg-light); }
@@ -337,8 +339,8 @@
                     <a href="#interativo" class="btn-cta">Ver em 3D</a>
                 </div>
                 <div class="hero-video-wrapper">
-                    <video controls playsinline poster="assets/images/capa-video.jpg">
-                        <source src="assets/videos/video-propaganda.mp4" type="video/mp4">
+                    <video controls playsinline>
+                        <source src="toolfins vertical divulgação.mp4" type="video/mp4">
                         Seu navegador não suporta a reprodução de vídeos.
                     </video>
                 </div>
