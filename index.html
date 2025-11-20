@@ -319,6 +319,38 @@
             transform: scale(1.1);
             box-shadow: 0 0 8px rgba(0, 168, 255, 0.5);
         }
+        .color-custom-input {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .color-custom-input:hover {
+            border-color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(0, 168, 255, 0.5);
+        }
+        .color-custom-input::-webkit-color-swatch-wrapper {
+            padding: 0;
+            border-radius: 50%;
+        }
+        .color-custom-input::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
+        }
+        .color-custom-input::-moz-color-swatch {
+            border: none;
+            border-radius: 50%;
+        }
         .color-picker-dropdown button {
             padding: 8px 16px;
             font-size: 0.8rem;
@@ -661,8 +693,8 @@
                                         <div class="color-preset" style="background: #00ff00;" title="Verde" data-color="#00ff00"></div>
                                         <div class="color-preset" style="background: #ffff00;" title="Amarelo" data-color="#ffff00"></div>
                                         <div class="color-preset" style="background: #ff00ff;" title="Magenta" data-color="#ff00ff"></div>
+                                        <input type="color" id="bodyColorCustom" class="color-custom-input" title="Cor personalizada">
                                     </div>
-                                    <button id="resetBodyColor" class="btn-reset">Padrão</button>
                                 </div>
                             </div>
                         </div>
@@ -678,8 +710,8 @@
                                         <div class="color-preset" style="background: #00ff00;" title="Verde" data-color="#00ff00"></div>
                                         <div class="color-preset" style="background: #ffff00;" title="Amarelo" data-color="#ffff00"></div>
                                         <div class="color-preset" style="background: #ff00ff;" title="Magenta" data-color="#ff00ff"></div>
+                                        <input type="color" id="capColorCustom" class="color-custom-input" title="Cor personalizada">
                                     </div>
-                                    <button id="resetCapColor" class="btn-reset">Padrão</button>
                                 </div>
                             </div>
                         </div>
@@ -1001,6 +1033,27 @@
             });
         });
 
+        // Lidar com input color customizado no dropdown
+        const bodyColorCustom = document.getElementById('bodyColorCustom');
+        if (bodyColorCustom) {
+            bodyColorCustom.addEventListener('input', (e) => {
+                const color = e.target.value;
+                bodyColorPicker.value = color;
+                bodyColorPicker.dispatchEvent(new Event('input', { bubbles: true }));
+                bodyColorDropdown.classList.remove('show');
+            });
+        }
+
+        const capColorCustom = document.getElementById('capColorCustom');
+        if (capColorCustom) {
+            capColorCustom.addEventListener('input', (e) => {
+                const color = e.target.value;
+                capColorPickerInput.value = color;
+                capColorPickerInput.dispatchEvent(new Event('input', { bubbles: true }));
+                capColorDropdown.classList.remove('show');
+            });
+        }
+
         // Color picker do corpo (se existir)
         const bodyColorPickerInput = document.getElementById('bodyColorPicker');
         if (bodyColorPicker) {
@@ -1043,24 +1096,6 @@
                         child.material.needsUpdate = true;
                     }
                 });
-            });
-        }
-
-        // Botão reset Toolfins
-        const resetBodyColor = document.getElementById('resetBodyColor');
-        if (resetBodyColor) {
-            resetBodyColor.addEventListener('click', () => {
-                bodyColorPicker.value = '#007bff';
-                bodyColorPicker.dispatchEvent(new Event('input'));
-            });
-        }
-
-        // Botão reset Capinha
-        const resetCapColor = document.getElementById('resetCapColor');
-        if (resetCapColor) {
-            resetCapColor.addEventListener('click', () => {
-                capColorPicker.value = '#007bff';
-                capColorPicker.dispatchEvent(new Event('input'));
             });
         }
 
