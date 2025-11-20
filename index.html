@@ -725,6 +725,11 @@
             });
         });
 
+        // Scroll para o topo ao carregar a página
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
+        });
+
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
     </script>
