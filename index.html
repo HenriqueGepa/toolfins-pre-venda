@@ -833,13 +833,13 @@
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
 
-        // Logo: clicar volta ao topo da página (smooth scroll)
-        document.addEventListener('DOMContentLoaded', () => {
+        // Logo: clicar volta ao topo da página (scroll instantâneo)
+        window.addEventListener('load', () => {
             const siteLogo = document.querySelector('.logo');
             if (siteLogo) {
                 siteLogo.addEventListener('click', (e) => {
                     e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    scrollToTop();
                 });
             }
         });
