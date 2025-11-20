@@ -94,7 +94,7 @@
             flex-wrap: nowrap;
             gap: 20px;
         }
-        .logo { height: 60px; width: auto; } /* Ajuste conforme seu logo */
+        .logo { height: 60px; width: auto; cursor: pointer; } /* Ajuste conforme seu logo */
         .nav-links { list-style: none; display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: #e0e0e0; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--primary-color); }
@@ -832,6 +832,17 @@
 
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
+
+        // Logo: clicar volta ao topo da página (smooth scroll)
+        document.addEventListener('DOMContentLoaded', () => {
+            const siteLogo = document.querySelector('.logo');
+            if (siteLogo) {
+                siteLogo.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
     </script>
 </body>
 </html>
