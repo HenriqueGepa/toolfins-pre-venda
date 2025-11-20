@@ -95,6 +95,7 @@
             gap: 20px;
         }
         .logo { height: 60px; width: auto; cursor: pointer; } /* Ajuste conforme seu logo */
+        .logo-link { display: inline-block; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: #e0e0e0; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: var(--primary-color); }
@@ -438,7 +439,7 @@
 
     <header>
         <div class="container header-content">
-            <img src="logo branco.png" alt="Logo ToolFins" class="logo">
+            <a href="#hero" class="logo-link"><img src="logo branco.png" alt="Logo ToolFins" class="logo"></a>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
@@ -639,6 +640,11 @@
     </footer>
 
     <script>
+        // Desabilitar restauração automática de scroll do navegador
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
         let scene, camera, renderer, toolfinsModel, mixer;
         const animationActions = {};
         let clock = new THREE.Clock();
@@ -832,17 +838,6 @@
 
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
-
-        // Logo: clicar volta ao topo da página (scroll instantâneo)
-        window.addEventListener('load', () => {
-            const siteLogo = document.querySelector('.logo');
-            if (siteLogo) {
-                siteLogo.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    scrollToTop();
-                });
-            }
-        });
     </script>
 </body>
 </html>
