@@ -45,11 +45,10 @@
         /* Canvas de ondas */
         #waveCanvas {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 85%;
-            height: 85%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 0;
             display: block;
             pointer-events: none;
@@ -207,16 +206,16 @@
         /* 3D Principal com sobreposição de texto */
         .hero-3d-wrapper {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 50%;
+            left: 50%;
+            width: 85vw;
+            height: 85vh;
+            transform: translate(-50%, -50%);
             max-width: none;
             border-radius: 0;
             overflow: visible;
             box-shadow: none;
             background: transparent;
-            margin-left: calc(-50vw + 50%);
         }
         
         #hero-three-container {
