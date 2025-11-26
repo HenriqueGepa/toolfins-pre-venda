@@ -1272,8 +1272,9 @@
         canvas.height = window.innerHeight;
         
         let baseWaveOffset = 0;
-        let scrollProgress = 0;
-        let animationTime = 0;
+        let scrollVelocity = 0;
+        let lastScrollY = 0;
+        let scrollTimeout;
         
         function drawWave(offsetY, amplitude, frequency, phase, color, opacity) {
             ctx.fillStyle = color;
@@ -1302,26 +1303,36 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Movimento suave constante + aceleração com scroll
+            // Movimento suave constante + aceleração temporária com scroll
             const baseSpeed = 0.005; // Movimento bem suave quando parado
-            const scrollSpeed = scrollProgress * 0.05; // Acelera com scroll
-            baseWaveOffset += baseSpeed + scrollSpeed;
+            const totalSpeed = baseSpeed + (scrollVelocity * 0.08);
+            baseWaveOffset += totalSpeed;
             
-            // Desenhar múltiplas ondas com movimento combinado
-            drawWave(canvas.height * 0.6, 30 + (scrollProgress * 20), 150, baseWaveOffset + (scrollProgress * Math.PI * 2), '#00a8ff', 0.2);
-            drawWave(canvas.height * 0.65, 25 + (scrollProgress * 15), 200, baseWaveOffset * 0.8 + (scrollProgress * Math.PI * 3), '#00d4ff', 0.15);
-            drawWave(canvas.height * 0.7, 20 + (scrollProgress * 10), 250, baseWaveOffset * 1.2 + (scrollProgress * Math.PI * 4), '#0088cc', 0.1);
+            // Desenhar múltiplas ondas
+            drawWave(canvas.height * 0.6, 30, 150, baseWaveOffset, '#00a8ff', 0.2);
+            drawWave(canvas.height * 0.65, 25, 200, baseWaveOffset * 0.8, '#00d4ff', 0.15);
+            drawWave(canvas.height * 0.7, 20, 250, baseWaveOffset * 1.2, '#0088cc', 0.1);
             
             requestAnimationFrame(animate);
         }
         
         animate();
         
-        // Atualizar scroll progress
+        // Detectar velocidade do scroll
         window.addEventListener('scroll', () => {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            scrollProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-        });
+            const currentScrollY = window.scrollY;
+            scrollVelocity = Math.abs(currentScrollY - lastScrollY) / 16; // Normalizar por frame
+            scrollVelocity = Math.min(scrollVelocity, 3); // Limitar a velocidade máxima
+            lastScrollY = currentScrollY;
+            
+            // Limpar timeout anterior
+            clearTimeout(scrollTimeout);
+            
+            // Voltar à velocidade normal após parar de rolar
+            scrollTimeout = setTimeout(() => {
+                scrollVelocity = 0;
+            }, 150); // 150ms após parar de rolar
+        }, { passive: true });
         
         // Ajustar canvas ao redimensionar
         window.addEventListener('resize', () => {
