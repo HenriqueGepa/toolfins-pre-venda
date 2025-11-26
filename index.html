@@ -1513,38 +1513,53 @@
         // Fechar menu ao clicar em um link
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('mobile-open');
+                const href = link.getAttribute('href');
                 
-                // Adicionar efeito visual
-                link.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    link.style.transform = 'scale(1)';
-                }, 150);
+                // Se for link de âncora, fazer transição suave
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    // Fechar menu
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-open');
+                    
+                    // Adicionar efeito visual
+                    link.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        link.style.transform = 'scale(1)';
+                    }, 150);
+
+                    // Transição suave para a seção clicada
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        // Pequeno delay para garantir que o menu fecha antes de rolar
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                    }
+                } else {
+                    // Links normais
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-open');
+                    
+                    link.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        link.style.transform = 'scale(1)';
+                    }, 150);
+                }
             });
         });
 
-        // Função para forçar scroll ao topo
+        // Função para forçar scroll ao topo (apenas ao carregar inicial)
         function scrollToTop() {
             window.scrollTo(0, 0);
             document.documentElement.scrollTop = 0;
             document.body.scrollTop = 0;
         }
 
-        // Executar ao carregar
-        scrollToTop();
-
-        // Scroll para o topo ao carregar a página - Solução robusta
-        window.addEventListener('load', () => {
-            scrollToTop();
-            setTimeout(scrollToTop, 100);
-        });
-
-        window.addEventListener('beforeunload', () => {
-            scrollToTop();
-        });
-
-        // Garantir que volta ao topo ao carregar
+        // Executar ao carregar INICIAL apenas
         document.addEventListener('DOMContentLoaded', () => {
             scrollToTop();
             setTimeout(scrollToTop, 50);
