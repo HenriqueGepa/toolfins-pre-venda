@@ -189,7 +189,7 @@
         .subtitle { text-align: center; color: var(--text-light); margin-bottom: 50px; display: block; }
 
         /* 1. HERO (3D PRINCIPAL) */
-        .hero-section { background: transparent; position: relative; }
+        .hero-section { background: transparent; position: relative; width: 100%; height: 100vh; margin: 0; padding: 0; }
         .hero-container {
             display: flex;
             flex-direction: column;
@@ -197,14 +197,18 @@
             justify-content: center;
             gap: 30px;
             position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
         }
         
         /* 3D Principal com sobreposição de texto */
         .hero-3d-wrapper {
             position: relative;
             width: 100%;
-            max-width: 700px;
-            height: 600px;
+            height: 100%;
+            max-width: none;
             border-radius: 0;
             overflow: visible;
             box-shadow: none;
@@ -1033,13 +1037,6 @@
         function animateHero3D() {
             requestAnimationFrame(animateHero3D);
             const delta = clock.getDelta();
-            
-            // Movimento aleatório sutil se o usuário não está interagindo
-            if (heroModel) {
-                const time = Date.now() * 0.0003;
-                heroModel.rotation.x += Math.sin(time) * 0.0005;
-                heroModel.rotation.y += Math.cos(time) * 0.0005;
-            }
             
             heroRenderer.render(heroScene, heroCamera);
         }
