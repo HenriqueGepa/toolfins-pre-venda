@@ -127,9 +127,10 @@
         .logo { height: 50px; width: auto; cursor: pointer; opacity: 0.75; } /* Ajuste conforme seu logo */
         .logo-link { display: inline-block; text-decoration: none; }
         .nav-links { list-style: none; display: flex; gap: 25px; }
-        .nav-links a { text-decoration: none; color: #2a2a2a; font-weight: 500; font-size: 15px; text-transform: uppercase; transition: all 0.3s ease; }
-        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links a { text-decoration: none; color: #2a2a2a; font-weight: 500; font-size: 15px; text-transform: uppercase; transition: all 0.3s ease; position: relative; }
+        .nav-links a:hover { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; }
         .nav-links a:active { transform: scale(0.95); }
+        .nav-links a.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; }
 
         /* MENU HAMBÚRGUER */
         .menu-toggle {
@@ -1601,6 +1602,43 @@
             initHero3D();
             init3D();
         });
+
+        // ==================== MARCAR LINK ATIVO CONFORME SCROLL ====================
+        function updateActiveLink() {
+            const sections = document.querySelectorAll('section[id]');
+            let currentSection = null;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Se o scroll está dentro dessa seção, marca como atual
+                if (window.pageYOffset >= sectionTop - 100 && 
+                    window.pageYOffset < sectionTop + sectionHeight - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            // Atualizar links ativos
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const linkTarget = href.substring(1);
+                    
+                    if (linkTarget === currentSection) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        // Chamar ao scroll
+        window.addEventListener('scroll', updateActiveLink);
+        
+        // Chamar ao carregar página
+        document.addEventListener('DOMContentLoaded', updateActiveLink);
 
         // ==================== ANIMAÇÃO DE ONDAS ====================
         const canvas = document.getElementById('waveCanvas');
