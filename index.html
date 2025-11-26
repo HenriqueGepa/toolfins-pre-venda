@@ -264,18 +264,17 @@
             justify-content: center;
         }
         
+ */
         .hero-overlay-text h1 {
             font-size: 3rem;
-            color: #ffffff;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            color: #3f3c37;
             line-height: 1.3;
             margin: 0 0 15px 0;
         }
         
         .hero-overlay-text p {
             font-size: 1rem;
-            color: #ffffff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            color: #3f3c37;
             line-height: 1.6;
             margin: 0 0 25px 0;
             max-width: 90%;
@@ -289,19 +288,66 @@
         }
         
         .hero-bubble {
-            background: transparent;
+            /* background: transparent;
             backdrop-filter: none;
             border: none;
-            color: #ffffff;
+            color: #3f3c37;
             padding: 0;
             border-radius: 0;
             font-size: 0.9rem;
             font-weight: 500;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 8px; */
+            display: flex; /* Para alinhar o conteúdo (ícone e texto) */
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border-radius: 30px; /* Bem arredondado */
+  cursor: pointer;
+  
+  /* Cor base translúcida */
+  background-color: rgba(255, 255, 255, 0.15); 
+  
+  /* GRADIENTE sutil para as variações de cor e brilho */
+  background-image: 
+    linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0.2), /* Brilho no topo-esquerdo */
+      rgba(255, 255, 255, 0) /* Transparente no meio */
+    ),
+    linear-gradient(
+      to top left,
+      rgba(200, 230, 255, 0.1), /* Azul claro sutil no fundo */
+      rgba(255, 200, 230, 0.1) /* Rosa claro sutil no fundo */
+    );
+
+  /* Efeito de Vidro Fosco (CRUCIAL!) */
+  backdrop-filter: blur(10px); /* Ajuste o valor para mais ou menos desfoque */
+  -webkit-backdrop-filter: blur(10px); /* Suporte para navegadores Webkit */
+
+  /* Borda sutil para definir melhor o elemento */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* Sombra para profundidade e brilho */
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1), /* Sombra principal */
+    inset 0 1px 0 rgba(255, 255, 255, 0.5), /* Brilho interno superior */
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1); /* Sombra interna inferior */
+  
+  /* Estilo do texto */
+  color: white;
+  font-family: 'Segoe UI', sans-serif; /* Ou sua fonte preferida */
+  font-size: 1.2em;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Sombra no texto para destaque */
+  text-decoration: none; /* Se for um link */
+  gap: 10px; /* Espaçamento entre ícone e texto */
+
+  /* Transições para interatividade (hover) */
+  transition: all 0.3s ease;
+
         }
         
         .hero-bubble::before {
