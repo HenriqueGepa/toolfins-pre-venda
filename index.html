@@ -987,11 +987,8 @@
             fillLight.position.set(-8, 6, -5);
             heroScene.add(fillLight);
 
-            // Controles
-            const heroControls = new THREE.OrbitControls(heroCamera, heroRenderer.domElement);
-            heroControls.enableDamping = true;
-            heroControls.autoRotate = true;
-            heroControls.autoRotateSpeed = 3;
+            // Controles desabilitados - sem interação do usuário
+            // Rotação será feita manualmente na função animateHero3D()
 
             // Carregar modelo
             const loader = new THREE.GLTFLoader();
@@ -1039,6 +1036,11 @@
         function animateHero3D() {
             requestAnimationFrame(animateHero3D);
             const delta = clock.getDelta();
+            
+            // Rotação automática suave no eixo vertical (X)
+            if (heroModel) {
+                heroModel.rotation.x += 0.0008;
+            }
             
             heroRenderer.render(heroScene, heroCamera);
         }
