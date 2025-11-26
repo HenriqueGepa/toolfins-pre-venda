@@ -51,6 +51,7 @@
             height: 100%;
             z-index: -1;
             display: block;
+            pointer-events: none;
         }
 
         body::before {
@@ -257,6 +258,7 @@
             overflow: hidden;
             position: relative;
             min-width: 300px;
+            z-index: 10;
         }
         
         /* Ocultar controle de volume nos vídeos de função */
@@ -944,6 +946,7 @@
             renderer.outputEncoding = THREE.sRGBEncoding;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.2;
+            renderer.domElement.style.zIndex = '10';
             container.appendChild(renderer.domElement);
 
             // 4. Luzes com HYPER-REALISMO (otimizado e limpo)
