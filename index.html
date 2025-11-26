@@ -956,19 +956,19 @@
             container.appendChild(renderer.domElement);
 
             // 4. Luzes com HYPER-REALISMO (otimizado e limpo)
-            const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
             scene.add(ambientLight);
             
-            const topLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            const topLight = new THREE.DirectionalLight(0xffffff, 0.9);
             topLight.position.set(0, 10, 0);
             scene.add(topLight);
             
-            const frontLight = new THREE.DirectionalLight(0xffffff, 1.2);
+            const frontLight = new THREE.DirectionalLight(0xffffff, 0.7);
             //
             frontLight.position.set(5, 8, 10);
             scene.add(frontLight);
             
-            const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.5);
+            const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.3);
             fillLight.position.set(-8, 6, -5);
             scene.add(fillLight);
 
@@ -1232,9 +1232,15 @@
 
         // Fechar menu ao clicar em um link
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
                 menuToggle.classList.remove('active');
                 navMenu.classList.remove('mobile-open');
+                
+                // Adicionar efeito visual
+                link.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    link.style.transform = 'scale(1)';
+                }, 150);
             });
         });
 
