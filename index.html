@@ -192,7 +192,7 @@
         .about-section { padding-bottom: 150px !important; }
 
         /* 1. HERO (3D PRINCIPAL) */
-        .hero-section { background: transparent; position: relative; width: 100%; height: auto; margin: 0; padding: 60px 20px; }
+        .hero-section { background: transparent; position: relative; width: 100%; height: 100vh; margin: 0; padding: 0; }
         .hero-container {
             display: flex;
             flex-direction: column;
@@ -201,18 +201,20 @@
             gap: 30px;
             position: relative;
             width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
+            height: 100%;
+            margin: 0;
             padding: 0;
         }
         
         /* 3D Principal com sobreposição de texto */
         .hero-3d-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: 500px;
-            transform: none;
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            width: 85vw;
+            height: 85vh;
+            transform: translate(-50%, -50%);
+            max-width: none;
             border-radius: 0;
             overflow: visible;
             box-shadow: none;
@@ -250,20 +252,19 @@
         
         /* Overlay centralizado sobre o canvas - dentro do hero wrapper */
         .hero-overlay-text {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            z-index: 10;
-            text-align: center;
-            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            justify-content: flex-end;
+            padding: 40px;
+            background: transparent;
+            z-index: 5;
+            pointer-events: none;
+            backdrop-filter: none;
         }
         
  
@@ -780,8 +781,11 @@
 
         /* RESPONSIVIDADE (MOBILE) */
         @media (max-width: 768px) {
-            .hero-section { padding: 40px 15px; }
-            .hero-3d-wrapper { height: 400px; }
+            .hero-section { height: 80vh; }
+            .hero-3d-wrapper {
+                width: 95vw;
+                height: 75vh;
+            }
             .hero-text-overlay h1 { font-size: 1.8rem; color: #3f3c37; text-shadow: none; }
             .hero-text-overlay p { font-size: 0.9rem; color: #3f3c37; }
             header { padding: 5px 0; position: relative; }
@@ -869,8 +873,11 @@
         }
 
         @media (max-width: 480px) {
-            .hero-section { padding: 30px 15px; }
-            .hero-3d-wrapper { height: 300px; }
+            .hero-section { height: 70vh; }
+            .hero-3d-wrapper {
+                width: 95vw;
+                height: 65vh;
+            }
             .hero-text-overlay h1 { font-size: 1.5rem; color: #3f3c37; text-shadow: none; }
             .hero-text-overlay p { font-size: 0.8rem; color: #3f3c37; }
             .hero-text h1 { font-size: 1.5rem; }
