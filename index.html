@@ -1271,8 +1271,9 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
+        let baseWaveOffset = 0;
         let scrollProgress = 0;
-        let lastScrollY = 0;
+        let animationTime = 0;
         
         function drawWave(offsetY, amplitude, frequency, phase, color, opacity) {
             ctx.fillStyle = color;
@@ -1301,10 +1302,15 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Desenhar múltiplas ondas baseado no scroll progress
-            drawWave(canvas.height * 0.6, 30 + (scrollProgress * 20), 150, scrollProgress * Math.PI * 4, '#00a8ff', 0.2);
-            drawWave(canvas.height * 0.65, 25 + (scrollProgress * 15), 200, scrollProgress * Math.PI * 6, '#00d4ff', 0.15);
-            drawWave(canvas.height * 0.7, 20 + (scrollProgress * 10), 250, scrollProgress * Math.PI * 8, '#0088cc', 0.1);
+            // Movimento suave constante + aceleração com scroll
+            const baseSpeed = 0.005; // Movimento bem suave quando parado
+            const scrollSpeed = scrollProgress * 0.05; // Acelera com scroll
+            baseWaveOffset += baseSpeed + scrollSpeed;
+            
+            // Desenhar múltiplas ondas com movimento combinado
+            drawWave(canvas.height * 0.6, 30 + (scrollProgress * 20), 150, baseWaveOffset + (scrollProgress * Math.PI * 2), '#00a8ff', 0.2);
+            drawWave(canvas.height * 0.65, 25 + (scrollProgress * 15), 200, baseWaveOffset * 0.8 + (scrollProgress * Math.PI * 3), '#00d4ff', 0.15);
+            drawWave(canvas.height * 0.7, 20 + (scrollProgress * 10), 250, baseWaveOffset * 1.2 + (scrollProgress * Math.PI * 4), '#0088cc', 0.1);
             
             requestAnimationFrame(animate);
         }
