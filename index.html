@@ -1461,10 +1461,10 @@
             const totalSpeed = baseSpeed + (scrollVelocity * 0.03);
             baseWaveOffset += totalSpeed;
             
-            // Desenhar múltiplas ondas com cores claras
-            drawWave(canvas.height * 0.6, 30, 150, baseWaveOffset, '#0066cc', 0.15);
-            drawWave(canvas.height * 0.65, 25, 200, baseWaveOffset * 0.8, '#0080ff', 0.12);
-            drawWave(canvas.height * 0.7, 20, 250, baseWaveOffset * 1.2, '#0052a3', 0.08);
+            // Desenhar múltiplas ondas com cores claras do ToolFins
+            drawWave(canvas.height * 0.6, 30, 150, baseWaveOffset, '#007bff', 1);
+            drawWave(canvas.height * 0.65, 25, 200, baseWaveOffset * 0.8, '#0056cc', 1);
+            drawWave(canvas.height * 0.7, 20, 250, baseWaveOffset * 1.2, '#003d99', 1);
             
             requestAnimationFrame(animateWaves);
         }
