@@ -1271,11 +1271,10 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        let wave1Offset = 0;
-        let wave2Offset = 0;
         let scrollProgress = 0;
+        let lastScrollY = 0;
         
-        function drawWave(offsetX, offsetY, amplitude, frequency, phase, color, opacity) {
+        function drawWave(offsetY, amplitude, frequency, phase, color, opacity) {
             ctx.fillStyle = color;
             ctx.globalAlpha = opacity;
             ctx.beginPath();
@@ -1283,8 +1282,7 @@
             
             for (let x = 0; x <= canvas.width; x += 5) {
                 const y = offsetY + 
-                    amplitude * Math.sin((x / frequency) + phase + wave1Offset) +
-                    amplitude * 0.5 * Math.sin((x / (frequency * 2)) + phase + wave2Offset);
+                    amplitude * Math.sin((x / frequency) + phase);
                 ctx.lineTo(x, y);
             }
             
@@ -1303,14 +1301,10 @@
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Atualizar offsets baseado no scroll
-            wave1Offset += 0.02 + (scrollProgress * 0.05);
-            wave2Offset -= 0.015 + (scrollProgress * 0.03);
-            
-            // Desenhar múltiplas ondas com cores diferentes
-            drawWave(0, canvas.height * 0.6, 30 + (scrollProgress * 20), 150, 0, '#00a8ff', 0.2);
-            drawWave(0, canvas.height * 0.65, 25 + (scrollProgress * 15), 200, Math.PI / 4, '#00d4ff', 0.15);
-            drawWave(0, canvas.height * 0.7, 20 + (scrollProgress * 10), 250, Math.PI / 2, '#0088cc', 0.1);
+            // Desenhar múltiplas ondas baseado no scroll progress
+            drawWave(canvas.height * 0.6, 30 + (scrollProgress * 20), 150, scrollProgress * Math.PI * 4, '#00a8ff', 0.2);
+            drawWave(canvas.height * 0.65, 25 + (scrollProgress * 15), 200, scrollProgress * Math.PI * 6, '#00d4ff', 0.15);
+            drawWave(canvas.height * 0.7, 20 + (scrollProgress * 10), 250, scrollProgress * Math.PI * 8, '#0088cc', 0.1);
             
             requestAnimationFrame(animate);
         }
