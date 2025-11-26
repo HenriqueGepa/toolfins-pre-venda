@@ -371,10 +371,16 @@
         .interactive-wrapper {
             display: flex;
             gap: 30px;
-            background: #f0ebe0;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
             flex-wrap: wrap;
         }
         #three-container {
@@ -422,7 +428,7 @@
         .control-group label {
             margin-bottom: 10px;
             font-size: 0.95rem;
-            color: #2a2a2a;
+            color: #3f3c37 !important;
         }
         .color-picker-wrapper {
             display: flex;
@@ -569,7 +575,7 @@
             border: none;
             border-radius: 50%;
         }
-        .control-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #e0e0e0; }
+        .control-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #3f3c37 !important; }
         .btn-toggle-fin {
             transition: all 0.3s ease !important;
             transform: translateX(-50%) !important;
@@ -579,9 +585,9 @@
             border-color: rgba(0, 168, 255, 0.5) !important;
         }
         .btn-action {
-            background: #0066cc;
-            color: white;
-            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: #3f3c37;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 15px 20px;
             border-radius: 8px;
             cursor: pointer;
@@ -591,8 +597,21 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        .btn-action:hover { background: #0052a3; }
+        .btn-action:hover { 
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 6px 12px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+        }
 
         /* 3. GALERIA */
         .gallery-grid {
@@ -604,7 +623,14 @@
         .gallery-item {
             overflow: hidden;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
         }
@@ -627,7 +653,7 @@
         .gallery-item p {
             text-align: center;
             margin-top: 10px;
-            color: #2a2a2a;
+            color: #3f3c37 !important;
             font-weight: 500;
             padding: 0 10px;
         }
@@ -726,10 +752,12 @@
         .footer-col h4 { color: #89d7eb; margin-bottom: 20px; font-size: 1.2rem; }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #666666; text-decoration: none; transition: color 0.3s; }
-        .footer-col ul li a:hover { color: #89d7eb; }
+        .footer-col ul li a { color: #3f3c37; text-decoration: none; transition: all 0.3s ease; position: relative; }
+        .footer-col ul li a:hover { color: #89d7eb; border-bottom: 2px solid #89d7eb; padding-bottom: 3px; }
         
-        .contact-info p { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .contact-info p { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; color: #3f3c37; }
+        .contact-info p a { color: #3f3c37 !important; text-decoration: none !important; transition: all 0.3s ease !important; position: relative; }
+        .contact-info p a:hover { color: #89d7eb !important; border-bottom: 2px solid #89d7eb !important; padding-bottom: 3px !important; }
         .social-icons { display: flex; gap: 15px; margin-top: 15px; }
         .social-icons a { 
             width: 40px; height: 40px; background: #d0d0cc; 
@@ -743,6 +771,10 @@
             border-top: 1px solid #d0d0cc;
             padding-top: 20px;
             text-align: center;
+        }
+        
+        .footer-bottom p {
+            color: #3f3c37;
         }
 
         /* RESPONSIVIDADE (MOBILE) */
@@ -929,7 +961,7 @@
 
                 <div class="interactive-wrapper">
                     <div id="three-container" style="position: relative;">
-                        <button id="toggleFinKey" class="btn-action" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; background: rgba(0, 168, 255, 0.15); backdrop-filter: blur(10px); border: 1px solid rgba(0, 168, 255, 0.3); width: 80px; height: 80px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; text-align: center; padding: 10px; line-height: 1.2;">
+                        <button id="toggleFinKey" class="btn-action" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; width: 80px; height: 80px; border-radius: 50%; font-size: 0.7rem; text-align: center; padding: 10px; line-height: 1.2;">
                             Abrir/Fechar Chavinha
                         </button>
                     </div>
@@ -1059,7 +1091,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>ToolFins</h4>
-                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">
+                    <p style="color: #3f3c37; font-size: 0.9rem; margin-bottom: 20px;">
                         Acessórios para surfistas de todos os níveis, pensados na qualidade e praticidade em cada detalhe.
                     </p>
                 </div>
@@ -1076,7 +1108,7 @@
                     <h4>Fale Conosco</h4>
                     <p>📍 São Paulo, SP - Brasil</p>
                     <p>📧 toolfins@gmail.com</p>
-                    <p>📱 <a href="https://wa.me/5511975942878" target="_blank" style="color:#ccc; text-decoration:none;">(11) 97594-2878</a></p>
+                    <p>📱 <a href="https://wa.me/5511975942878" target="_blank">(11) 97594-2878</a></p>
                 </div>
             </div>
 
