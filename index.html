@@ -1266,8 +1266,10 @@
             const delta = clock.getDelta();
             
             // Rotação automática suave no eixo vertical (X)
+            // Mais rápida no mobile (< 480px)
             if (heroModel) {
-                heroModel.rotation.x += 0.0008;
+                const rotationSpeed = window.innerWidth < 480 ? 0.0016 : 0.0008;
+                heroModel.rotation.x += rotationSpeed;
             }
             
             heroRenderer.render(heroScene, heroCamera);
