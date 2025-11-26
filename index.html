@@ -817,7 +817,7 @@
                 left: auto;
                 width: 100%;
                 height: auto;
-                min-height: 60vh;
+                height: 300px;
                 transform: none;
                 margin-bottom: 30px;
             }
@@ -875,10 +875,15 @@
         }
 
         @media (max-width: 480px) {
-            .hero-section { height: 70vh; }
+            .hero-section { height: auto; }
             .hero-3d-wrapper {
-                width: 95vw;
-                height: 65vh;
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: 250px;
+                transform: none;
+                margin-bottom: 20px;
             }
             .hero-text-overlay h1 { font-size: 1.5rem; color: #3f3c37; text-shadow: none; }
             .hero-text-overlay p { font-size: 0.8rem; color: #3f3c37; }
@@ -888,7 +893,12 @@
             
             /* Hero Overlay Ultra Mobile */
             .hero-3d-wrapper {
-                min-height: 50vh;
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: 250px;
+                transform: none;
                 margin-bottom: 20px;
             }
             .hero-overlay-text {
