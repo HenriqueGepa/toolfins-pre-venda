@@ -35,9 +35,34 @@
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             line-height: 1.6;
-            background: linear-gradient(180deg, #0d0d0d 0%, #1a2a3a 50%, #0d0d0d 100%);
+            background: #0d0d0d;
             background-attachment: fixed;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas de ondas */
+        #waveCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: block;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(13, 13, 13, 0.7) 0%, rgba(26, 42, 58, 0.3) 50%, rgba(13, 13, 13, 0.7) 100%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
@@ -155,7 +180,7 @@
         }
 
         /* TITULOS DE SEÇÃO */
-        section { padding: 80px 0; }
+        section { padding: 80px 0; position: relative; z-index: 1; }
         h2 { text-align: center; font-size: 2rem; margin-bottom: 10px; color: #00d4ff; }
         .subtitle { text-align: center; color: var(--text-light); margin-bottom: 50px; display: block; }
 
@@ -656,7 +681,8 @@
     </style>
 </head>
 <body>
-
+    <canvas id="waveCanvas"></canvas>
+    
     <header>
         <div class="container header-content">
             <a href="#hero" class="logo-link"><img src="logo branco.png" alt="Logo ToolFins" class="logo"></a>
@@ -1237,6 +1263,71 @@
 
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
+
+        // ==================== ANIMAÇÃO DE ONDAS ====================
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let wave1Offset = 0;
+        let wave2Offset = 0;
+        let scrollProgress = 0;
+        
+        function drawWave(offsetX, offsetY, amplitude, frequency, phase, color, opacity) {
+            ctx.fillStyle = color;
+            ctx.globalAlpha = opacity;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            
+            for (let x = 0; x <= canvas.width; x += 5) {
+                const y = offsetY + 
+                    amplitude * Math.sin((x / frequency) + phase + wave1Offset) +
+                    amplitude * 0.5 * Math.sin((x / (frequency * 2)) + phase + wave2Offset);
+                ctx.lineTo(x, y);
+            }
+            
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.closePath();
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+        
+        function animate() {
+            // Limpar canvas com gradiente
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#0d0d0d');
+            gradient.addColorStop(0.5, '#1a2a3a');
+            gradient.addColorStop(1, '#0d0d0d');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Atualizar offsets baseado no scroll
+            wave1Offset += 0.02 + (scrollProgress * 0.05);
+            wave2Offset -= 0.015 + (scrollProgress * 0.03);
+            
+            // Desenhar múltiplas ondas com cores diferentes
+            drawWave(0, canvas.height * 0.6, 30 + (scrollProgress * 20), 150, 0, '#00a8ff', 0.2);
+            drawWave(0, canvas.height * 0.65, 25 + (scrollProgress * 15), 200, Math.PI / 4, '#00d4ff', 0.15);
+            drawWave(0, canvas.height * 0.7, 20 + (scrollProgress * 10), 250, Math.PI / 2, '#0088cc', 0.1);
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        
+        // Atualizar scroll progress
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+        });
+        
+        // Ajustar canvas ao redimensionar
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
