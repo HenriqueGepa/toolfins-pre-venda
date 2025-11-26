@@ -1305,7 +1305,7 @@
             
             // Movimento suave constante + aceleração temporária com scroll
             const baseSpeed = 0.005; // Movimento bem suave quando parado
-            const totalSpeed = baseSpeed + (scrollVelocity * 0.08);
+            const totalSpeed = baseSpeed + (scrollVelocity * 0.03);
             baseWaveOffset += totalSpeed;
             
             // Desenhar múltiplas ondas
@@ -1322,7 +1322,7 @@
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
             scrollVelocity = Math.abs(currentScrollY - lastScrollY) / 16; // Normalizar por frame
-            scrollVelocity = Math.min(scrollVelocity, 3); // Limitar a velocidade máxima
+            scrollVelocity = Math.min(scrollVelocity, 1.5); // Limitar a velocidade máxima (reduzido de 3)
             lastScrollY = currentScrollY;
             
             // Limpar timeout anterior
