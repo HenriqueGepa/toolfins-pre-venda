@@ -1015,7 +1015,7 @@
                 const center = box.getCenter(new THREE.Vector3());
                 heroModel.position.sub(center);
                                 
-                heroModel.position.x = 100;      // Eixo horizontal esquerda/direita
+                heroModel.position.x = 0;      // Eixo horizontal esquerda/direita
                 heroModel.position.y = 0;      // Eixo vertical cima/baixo
                 heroModel.position.z = 0;      // Eixo profundidade
 
@@ -1046,6 +1046,11 @@
         function animateHero3D() {
             requestAnimationFrame(animateHero3D);
             const delta = clock.getDelta();
+            
+            // Rotação sutil e suave no eixo horizontal (Y)
+            if (heroModel) {
+                heroModel.rotation.y += 0.0008;
+            }
             
             heroRenderer.render(heroScene, heroCamera);
         }
