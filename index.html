@@ -765,6 +765,48 @@
             .bubble-text { font-size: 0.65rem; }
             .hero-video-wrapper { order: 2; width: 100%; max-width: 100%; margin-top: 30px; }
             .hero-text { order: 1; }
+            
+            /* Hero Overlay Responsivo */
+            .hero-3d-wrapper {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: auto;
+                min-height: 60vh;
+                transform: none;
+                margin-bottom: 30px;
+            }
+            .hero-overlay-text {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+                height: auto;
+                padding: 30px 20px;
+                justify-content: flex-start;
+            }
+            .hero-overlay-text h1 {
+                font-size: 2rem;
+                width: 100%;
+                margin: 20px 0 15px 0;
+            }
+            .hero-overlay-text p {
+                font-size: 14px;
+                width: 100%;
+                margin: 0 0 20px 0;
+            }
+            .hero-features-overlay {
+                gap: 10px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .hero-bubble {
+                font-size: 0.8rem;
+                padding: 10px 15px;
+            }
+            
             #three-container { height: 350px; width: 100%; min-height: 300px; flex: 1; }
             .interactive-wrapper { padding: 15px; gap: 20px; }
             .controls-panel { flex: 1; padding: 15px; display: flex; flex-direction: column; gap: 15px; }
@@ -792,6 +834,33 @@
             .hero-text h1 { font-size: 1.5rem; }
             .hero-text p { font-size: 0.9rem; }
             .bubble { min-width: 80px; padding: 8px 10px; font-size: 0.65rem; }
+            
+            /* Hero Overlay Ultra Mobile */
+            .hero-3d-wrapper {
+                min-height: 50vh;
+                margin-bottom: 20px;
+            }
+            .hero-overlay-text {
+                padding: 20px 15px;
+            }
+            .hero-overlay-text h1 {
+                font-size: 1.5rem;
+                width: 100%;
+                margin: 15px 0 10px 0;
+            }
+            .hero-overlay-text p {
+                font-size: 13px;
+                width: 100%;
+                margin: 0 0 15px 0;
+            }
+            .hero-features-overlay {
+                gap: 8px;
+            }
+            .hero-bubble {
+                font-size: 0.7rem;
+                padding: 8px 12px;
+            }
+            
             #three-container { height: 300px; }
             .controls-panel { padding: 12px; gap: 12px; }
             .control-group label { font-size: 0.85rem; }
