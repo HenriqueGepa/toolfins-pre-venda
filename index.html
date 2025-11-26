@@ -192,7 +192,7 @@
         .about-section { padding-bottom: 150px !important; }
 
         /* 1. HERO (3D PRINCIPAL) */
-        .hero-section { background: transparent; position: relative; width: 100%; height: 100vh; margin: 0; padding: 0; }
+        .hero-section { background: transparent; position: relative; width: 100%; height: auto; margin: 0; padding: 60px 0; }
         .hero-container {
             display: flex;
             flex-direction: column;
@@ -201,24 +201,24 @@
             gap: 30px;
             position: relative;
             width: 100%;
-            height: 100%;
+            height: auto;
             margin: 0;
             padding: 0;
         }
         
         /* 3D Principal com sobreposição de texto */
         .hero-3d-wrapper {
-            position: absolute;
-            top: 50%;
-            left: 70%;
-            width: 85vw;
-            height: 85vh;
-            transform: translate(-50%, -50%);
-            max-width: 100vw;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            transform: none;
+            max-width: 100%;
             border-radius: 0;
             overflow: visible;
             box-shadow: none;
             background: transparent;
+            margin: 0 auto;
         }
         
         #hero-three-container {
@@ -227,11 +227,11 @@
         }
         
         .hero-text-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
+            top: auto;
+            left: auto;
             width: 100%;
-            height: 100%;
+            height: auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -240,6 +240,7 @@
             z-index: 5;
             pointer-events: none;
             backdrop-filter: none;
+            margin-top: 30px;
         }
         
         .hero-text-overlay h1 {
@@ -781,50 +782,12 @@
 
         /* RESPONSIVIDADE (MOBILE) */
         @media (max-width: 768px) {
-            .hero-section { height: auto; min-height: 100%; padding: 20px 0; }
-            .hero-container { height: auto; min-height: auto; }
-            .hero-3d-wrapper {
-                position: relative;
-                top: auto;
-                left: auto;
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                min-height: 50vh;
-                transform: none;
-                margin-bottom: 30px;
-            }
-            #hero-three-container { width: 100%; height: 50vh; }
-            .hero-text-overlay {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 100%;
-                height: auto;
-                padding: 30px 20px;
-                justify-content: flex-start;
-                display: flex;
-                flex-direction: column;
-            }
-            .hero-text-overlay h1 {
-                font-size: 1.8rem !important;
-                color: #3f3c37 !important;
-                text-shadow: none !important;
-                margin: 20px 0 15px 0;
-                width: 100%;
-            }
-            .hero-text-overlay p {
-                font-size: 0.9rem !important;
-                color: #3f3c37 !important;
-                width: 100%;
-                margin: 0 0 20px 0;
-            }
-            .hero-features-overlay {
-                gap: 10px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
+            .hero-section { padding: 40px 0; }
+            .hero-3d-wrapper { height: 400px; }
+            #hero-three-container { width: 100%; height: 400px; }
+            .hero-text-overlay { padding: 20px; margin-top: 20px; }
+            .hero-text-overlay h1 { font-size: 1.8rem; color: #3f3c37; text-shadow: none; }
+            .hero-text-overlay p { font-size: 0.9rem; color: #3f3c37; }
             header { padding: 5px 0; position: relative; }
             .logo { height: 50px; }
             .menu-toggle { display: flex; }
@@ -910,45 +873,12 @@
         }
 
         @media (max-width: 480px) {
-            .hero-section { height: auto; min-height: 100%; padding: 15px 0; }
-            .hero-container { height: auto; min-height: auto; }
-            .hero-3d-wrapper {
-                position: relative;
-                top: auto;
-                left: auto;
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                min-height: 40vh;
-                transform: none;
-                margin-bottom: 20px;
-            }
-            #hero-three-container { width: 100%; height: 40vh; }
-            .hero-text-overlay {
-                position: relative !important;
-                top: auto !important;
-                left: auto !important;
-                transform: none !important;
-                width: 100%;
-                height: auto;
-                padding: 20px 15px;
-                justify-content: flex-start;
-                display: flex;
-                flex-direction: column;
-            }
-            .hero-text-overlay h1 {
-                font-size: 1.5rem !important;
-                color: #3f3c37 !important;
-                text-shadow: none !important;
-                margin: 15px 0 10px 0;
-                width: 100%;
-            }
-            .hero-text-overlay p {
-                font-size: 0.8rem !important;
-                color: #3f3c37 !important;
-                width: 100%;
-                margin: 0 0 15px 0;
-            }
+            .hero-section { padding: 30px 0; }
+            .hero-3d-wrapper { height: 300px; }
+            #hero-three-container { width: 100%; height: 300px; }
+            .hero-text-overlay { padding: 15px; margin-top: 15px; }
+            .hero-text-overlay h1 { font-size: 1.5rem; color: #3f3c37; text-shadow: none; }
+            .hero-text-overlay p { font-size: 0.8rem; color: #3f3c37; }
             .hero-text h1 { font-size: 1.5rem; }
             .hero-text p { font-size: 0.9rem; }
             .bubble { min-width: 80px; padding: 8px 10px; font-size: 0.65rem; }
