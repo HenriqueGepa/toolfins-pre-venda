@@ -1005,11 +1005,12 @@
 
                 const box = new THREE.Box3().setFromObject(heroModel);
                 const center = box.getCenter(new THREE.Vector3());
-                //heroModel.position.sub(center);
-                                
-                heroModel.position.x = 0;      // Eixo horizontal esquerda/direita
-                heroModel.position.y = 0;      // Eixo vertical cima/baixo - centralizado
-                heroModel.position.z = 0;      // Eixo profundidade
+                heroModel.position.sub(center);
+                
+                // Posicionar no canto superior esquerdo
+                heroModel.position.x = -2;     // Deslocar para esquerda
+                heroModel.position.y = 1.5;    // Deslocar para cima
+                heroModel.position.z = 0;      // Profundidade
 
                 // Ajustar rotação nos eixos X, Y, Z (em radianos)
                 heroModel.rotation.x = 0;      // Rotação para cima/baixo
@@ -1031,7 +1032,7 @@
                     }
                 });
 
-                //animateHero3D();
+                animateHero3D();
             });
         }
 
