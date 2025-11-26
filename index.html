@@ -1242,14 +1242,15 @@
             // 1. Cena
             scene = new THREE.Scene();
             
-            // Criar gradiente de fundo (cinza claro no topo, cinza escuro embaixo)
+            // Criar gradiente de fundo (bege/areia como o site)
             const canvas = document.createElement('canvas');
             canvas.width = 256;
             canvas.height = 256;
             const ctx = canvas.getContext('2d');
             const gradient = ctx.createLinearGradient(0, 0, 0, 256);
-            gradient.addColorStop(0, '#b0b0b0');    // Cinza claro no topo
-            gradient.addColorStop(1, '#606060');    // Cinza escuro embaixo
+            gradient.addColorStop(0, '#f5ead6');    // Bege claro no topo
+            gradient.addColorStop(0.5, '#ede5d9'); // Meio do gradiente
+            gradient.addColorStop(1, '#e8dcc8');   // Areia escura embaixo
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, 256, 256);
             
@@ -1267,7 +1268,7 @@
             renderer.outputEncoding = THREE.sRGBEncoding;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.2;
-            renderer.setClearColor(0xb0b0b0, 1);
+            renderer.setClearColor(0xf5ead6, 1);
             container.appendChild(renderer.domElement);
 
             // 4. Luzes com HYPER-REALISMO (otimizado e limpo)
