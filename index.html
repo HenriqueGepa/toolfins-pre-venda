@@ -35,15 +35,43 @@
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
             line-height: 1.6;
-            background: linear-gradient(180deg, #0d0d0d 0%, #1a2a3a 50%, #0d0d0d 100%);
+            background: #0d0d0d;
             background-attachment: fixed;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas de ondas */
+        #waveCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: block;
+            pointer-events: none;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(13, 13, 13, 0.7) 0%, rgba(26, 42, 58, 0.3) 50%, rgba(13, 13, 13, 0.7) 100%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
 
         img { max-width: 100%; display: block; }
@@ -155,7 +183,7 @@
         }
 
         /* TITULOS DE SEÇÃO */
-        section { padding: 80px 0; }
+        section { padding: 80px 0; position: relative; z-index: 1; }
         h2 { text-align: center; font-size: 2rem; margin-bottom: 10px; color: #00d4ff; }
         .subtitle { text-align: center; color: var(--text-light); margin-bottom: 50px; display: block; }
 
@@ -656,7 +684,8 @@
     </style>
 </head>
 <body>
-
+    <canvas id="waveCanvas"></canvas>
+    
     <header>
         <div class="container header-content">
             <a href="#hero" class="logo-link"><img src="logo branco.png" alt="Logo ToolFins" class="logo"></a>
@@ -888,6 +917,11 @@
 
         function init3D() {
             const container = document.getElementById('three-container');
+            
+            // Garantir que o container tem tamanho (fallback se necessário)
+            const width = container.clientWidth || 600;
+            const height = container.clientHeight || 450;
+            console.log('Container dimensions:', width, 'x', height);
 
             // 1. Cena
             scene = new THREE.Scene();
@@ -907,32 +941,33 @@
             scene.background = texture;
 
             // 2. Câmera
-            camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
             camera.position.set(0, 2, 5);
 
             // 3. Renderizador com HIGH QUALITY SETTINGS
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, precision: 'highp' });
-            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setSize(width, height);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.gammaOutput = true;
             renderer.outputEncoding = THREE.sRGBEncoding;
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.2;
+            renderer.setClearColor(0xb0b0b0, 1);
             container.appendChild(renderer.domElement);
 
             // 4. Luzes com HYPER-REALISMO (otimizado e limpo)
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+            const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
             scene.add(ambientLight);
             
-            const topLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            const topLight = new THREE.DirectionalLight(0xffffff, 1.5);
             topLight.position.set(0, 10, 0);
             scene.add(topLight);
             
-            const frontLight = new THREE.DirectionalLight(0xffffff, 0.25);
+            const frontLight = new THREE.DirectionalLight(0xffffff, 1.2);
+            //
             frontLight.position.set(5, 8, 10);
             scene.add(frontLight);
             
-            const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.25);
+            const fillLight = new THREE.DirectionalLight(0xe8f0ff, 0.5);
             fillLight.position.set(-8, 6, -5);
             scene.add(fillLight);
 
@@ -998,7 +1033,7 @@
                         animationActions[clip.name] = action;
                     });
                 }
-                animate();
+                // animate() será chamada no final da init3D
             }, 
             function (progress) {
                 console.log('Progresso do carregamento:', (progress.loaded / progress.total * 100).toFixed(2) + '%');
@@ -1009,10 +1044,15 @@
             });
 
             window.addEventListener('resize', () => {
-                camera.aspect = container.clientWidth / container.clientHeight;
+                const newWidth = container.clientWidth || 600;
+                const newHeight = container.clientHeight || 450;
+                camera.aspect = newWidth / newHeight;
                 camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setSize(newWidth, newHeight);
             });
+            
+            // Iniciar o loop de animação SEMPRE, independente do modelo carregar
+            animate();
         }
 
         // Desabilitar som nos vídeos de função
@@ -1237,6 +1277,82 @@
 
         // Inicializa 3D ao carregar
         document.addEventListener('DOMContentLoaded', init3D);
+
+        // ==================== ANIMAÇÃO DE ONDAS ====================
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let baseWaveOffset = 0;
+        let scrollVelocity = 0;
+        let lastScrollY = 0;
+        let scrollTimeout;
+        
+        function drawWave(offsetY, amplitude, frequency, phase, color, opacity) {
+            ctx.fillStyle = color;
+            ctx.globalAlpha = opacity;
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            
+            for (let x = 0; x <= canvas.width; x += 5) {
+                const y = offsetY + 
+                    amplitude * Math.sin((x / frequency) + phase);
+                ctx.lineTo(x, y);
+            }
+            
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.closePath();
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+        
+        function animateWaves() {
+            // Limpar canvas com gradiente
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#0d0d0d');
+            gradient.addColorStop(0.5, '#1a2a3a');
+            gradient.addColorStop(1, '#0d0d0d');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Movimento suave constante + aceleração temporária com scroll
+            const baseSpeed = 0.005; // Movimento bem suave quando parado
+            const totalSpeed = baseSpeed + (scrollVelocity * 0.03);
+            baseWaveOffset += totalSpeed;
+            
+            // Desenhar múltiplas ondas
+            drawWave(canvas.height * 0.6, 30, 150, baseWaveOffset, '#00a8ff', 0.2);
+            drawWave(canvas.height * 0.65, 25, 200, baseWaveOffset * 0.8, '#00d4ff', 0.15);
+            drawWave(canvas.height * 0.7, 20, 250, baseWaveOffset * 1.2, '#0088cc', 0.1);
+            
+            requestAnimationFrame(animateWaves);
+        }
+        
+        animateWaves();
+        
+        // Detectar velocidade do scroll
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            scrollVelocity = Math.abs(currentScrollY - lastScrollY) / 16; // Normalizar por frame
+            scrollVelocity = Math.min(scrollVelocity, 1.5); // Limitar a velocidade máxima (reduzido de 3)
+            lastScrollY = currentScrollY;
+            
+            // Limpar timeout anterior
+            clearTimeout(scrollTimeout);
+            
+            // Voltar à velocidade normal após parar de rolar
+            scrollTimeout = setTimeout(() => {
+                scrollVelocity = 0;
+            }, 150); // 150ms após parar de rolar
+        }, { passive: true });
+        
+        // Ajustar canvas ao redimensionar
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
