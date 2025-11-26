@@ -781,7 +781,28 @@
 
         /* RESPONSIVIDADE (MOBILE) */
         @media (max-width: 768px) {
-            .hero-section { height: auto; min-height: 60vh; }
+            .hero-section { height: auto; min-height: 80vh; padding: 20px 0; }
+            .hero-3d-wrapper {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: auto;
+                min-height: 50vh;
+                transform: none;
+                margin-bottom: 30px;
+            }
+            #hero-three-container { width: 100%; height: 50vh; }
+            .hero-text-overlay {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+                height: auto;
+                padding: 30px 20px;
+                justify-content: flex-start;
+            }
             header { padding: 5px 0; position: relative; }
             .logo { height: 50px; }
             .menu-toggle { display: flex; }
@@ -867,7 +888,28 @@
         }
 
         @media (max-width: 480px) {
-            .hero-section { height: auto; min-height: 50vh; }
+            .hero-section { height: auto; min-height: 70vh; padding: 15px 0; }
+            .hero-3d-wrapper {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                height: auto;
+                min-height: 40vh;
+                transform: none;
+                margin-bottom: 20px;
+            }
+            #hero-three-container { width: 100%; height: 40vh; }
+            .hero-text-overlay {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+                height: auto;
+                padding: 20px 15px;
+                justify-content: flex-start;
+            }
             .hero-text h1 { font-size: 1.5rem; }
             .hero-text p { font-size: 0.9rem; }
             .bubble { min-width: 80px; padding: 8px 10px; font-size: 0.65rem; }
