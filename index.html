@@ -205,14 +205,17 @@
         
         /* 3D Principal com sobreposição de texto */
         .hero-3d-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             max-width: none;
             border-radius: 0;
             overflow: visible;
             box-shadow: none;
             background: transparent;
+            margin-left: calc(-50vw + 50%);
         }
         
         #hero-three-container {
