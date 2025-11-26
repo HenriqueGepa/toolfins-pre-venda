@@ -1047,9 +1047,9 @@
             requestAnimationFrame(animateHero3D);
             const delta = clock.getDelta();
             
-            // Rotação sutil e suave no eixo horizontal (Y)
+            // Rotação sutil e suave no eixo vertical (X)
             if (heroModel) {
-                heroModel.rotation.y += 0.0008;
+                heroModel.rotation.x += 0.0008;
             }
             
             heroRenderer.render(heroScene, heroCamera);
